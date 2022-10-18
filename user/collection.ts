@@ -1,6 +1,7 @@
 import type {HydratedDocument, Types} from 'mongoose';
 import type {User} from './model';
 import UserModel from './model';
+import type {Alias} from '../alias/model'
 
 /**
  * This file contains a class with functionality to interact with users stored
@@ -20,8 +21,9 @@ class UserCollection {
    */
   static async addOne(username: string, password: string): Promise<HydratedDocument<User>> {
     const dateJoined = new Date();
+    const aliases: Alias[] = [];
 
-    const user = new UserModel({username, password, dateJoined});
+    const user = new UserModel({username, password, dateJoined, aliases});
     await user.save(); // Saves user to MongoDB
     return user;
   }
