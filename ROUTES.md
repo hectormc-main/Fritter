@@ -144,3 +144,68 @@ This renders the `index.html` file that will be used to interact with the backen
 **Throws**
 
 - `403` if the user is not logged in
+
+
+
+# Alias
+
+---
+
+### 'POST /api/alias/session' - log alias in
+
+**Returns**
+
+- A success message
+
+**Throws**
+
+- '400' if aliasname name is not correct format or missing in the req
+- '401' if alias name login credentials are invalid
+- '403' if alias already signed in
+
+
+### 'DELETE /api/alias/session' - log alias out
+
+**Returns**
+
+- A success message
+
+**Throws**
+
+- '403' if alias is not logged in
+
+
+### 'POST /api/alias' - create alias account
+
+**Returns**
+
+- The created Alias
+
+**Throws**
+
+- '400' if aliasname or userId not in correct format
+- '403' if there is an alias already logged in
+- '409' if aliasname already taken
+
+
+### 'PUT /api/alias' - Update alias account
+
+**Returns**
+
+- The updated alias
+
+**Throws**
+
+- '400' if aliasname or userId not in correct format
+- '403' if there is an alias already logged in
+- '409' if aliasname already taken
+
+### 'DELETE /api/alias' - Delete alias
+
+**Returns**
+
+- Success message
+
+**Throws**
+
+- '403' if user is not logged in
