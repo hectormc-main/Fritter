@@ -44,7 +44,7 @@ router.post(
 /**
  * Sign out an alias
  *
- * @name DELETE /api/alias/session
+ * @name DELETE /api/users/alias/session
  *
  * @return - None
  * @throws {403} - If alias is not logged in
