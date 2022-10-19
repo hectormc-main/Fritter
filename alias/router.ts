@@ -2,17 +2,17 @@ import type {Request, Response} from 'express';
 import express from 'express';
 import AliasCollection from './collection';
 import FreetCollection from '../freet/collection';
-import UserCollection from '../user/collection';
 import * as userValidator from '../user/middleware';
 import * as aliasValidator from './middleware';
 import * as util from './util';
+import UserCollection from '../user/collection';
 
 const router = express.Router();
 
 /**
  * Sign in Alias.
  *
- * @name POST /api/alias/session
+ * @name POST /api/user/alias/session
  *
  * @param {string} aliasname - The user's aliasname
  * @return {AliasResponse} - An object with alias's details
@@ -43,9 +43,9 @@ router.post(
 /**
  * Sign out an alias
  *
- * @name DELETE /api/alias/session
+ * @name DELETE /api/users/alias/session
  *
- * @return - None
+ * @return - Success message
  * @throws {403} - If alias is not logged in
  *
  */
@@ -65,7 +65,7 @@ router.delete(
 /**
  * Create an alias account.
  *
- * @name POST /api/alias
+ * @name POST /api/users/alias
  *
  * @param {string} aliasname - aliasname of Alias
  * @return {AliasResponse} - The created alias
@@ -77,15 +77,13 @@ router.delete(
 router.post(
   '/',
   [
-    aliasValidator.isAliasLoggedOut,
     aliasValidator.isValidAliasname,
     aliasValidator.isAliasnameNotAlreadyInUse,
-    userValidator.isUserLoggedIn,
+    userValidator.isUserLoggedIn
   ],
   async (req: Request, res: Response) => {
     const userId = (req.session.userId as string) ?? ''; // Will not be an empty string since its validated in isUserLoggedIn
-    const aliasId = (req.session.aliasId as string) ?? '';
-    const alias = await AliasCollection.addOne(userId, aliasId);
+    const alias = await AliasCollection.addOne(userId, req.body.aliasname);
     req.session.aliasId = alias._id.toString();
     res.status(201).json({
       message: `Your account was created successfully. You have been logged in as ${alias.aliasname}`,
@@ -95,16 +93,47 @@ router.post(
 );
 
 /**
+ * Get all aliases and currently active alias if active
+ *
+ * @name GET /api/users/alias
+ *
+ * @return {string} - message containing aliasname
+ * @throws {400} - If password or username is not in correct format
+ *
+ */
+router.get('/',
+  [
+    userValidator.isUserLoggedIn
+  ],
+  async (req: Request, res: Response) => {
+    let message = '';
+    if (req.session.aliasId !== undefined) {
+      const aliasId = (req.session.aliasId as string) ?? ''; // Will not be an empty string since its validated in isUserLoggedIn
+      const alias = await AliasCollection.findOneByAliasId(aliasId);
+      message += `You are currently loggid in as ${alias.aliasname}\n`;
+    }
+
+    const userId = (req.session.userId as string) ?? '';
+    const aliases = await AliasCollection.findAllByUserId(userId);
+    const response = aliases.map(a => a.aliasname);
+
+    message += `These are you current aliases: ${response.toString()}`;
+
+    res.status(200).json({
+      message
+    });
+  });
+
+/**
  * Update a user's profile.
  *
- * @name PUT /api/users
+ * @name PUT /api/users/alias
  *
- * @param {string} username - The user's new username
- * @param {string} password - The user's new password
- * @return {UserResponse} - The updated user
+ * @param {string} aliasname - The user's new aliasname
+ * @return {UserResponse} - The updated alias
  * @throws {403} - If user is not logged in
- * @throws {409} - If username already taken
- * @throws {400} - If username or password are not of the correct format
+ * @throws {409} - If aliasname already taken
+ * @throws {400} - If aliasname or userId are not of the correct format
  */
 router.put(
   '/',
@@ -130,7 +159,7 @@ router.put(
 /**
  * Delete an alias.
  *
- * @name DELETE /api/alias
+ * @name DELETE /api/users/alias
  *
  * @return {string} - A success message
  * @throws {403} - If the user is not logged in

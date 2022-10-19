@@ -81,6 +81,23 @@ const isAliasLoggedIn = (req: Request, res: Response, next: NextFunction) => {
 };
 
 /**
+ * Checks if the alias belongs to user that is logged in.
+ */
+const doesAliasBelongToUser = async (req: Request, res: Response, next: NextFunction) => {
+  const alias = await AliasCollection.findOneByAliasId(req.session.aliasId);
+  if (alias.userId !== req.session.userId) {
+    res.status(403).json({
+      error: {
+        auth: 'This Alias does not belong to you.'
+      }
+    });
+    return;
+  }
+
+  next();
+};
+
+/**
  * Checks if the alias is signed out, that is, aliasId is undefined in session
  */
 const isAliasLoggedOut = (req: Request, res: Response, next: NextFunction) => {
@@ -143,5 +160,6 @@ export {
   isValidAliasname,
   isAliasLoggedOut,
   isAliasLoggedIn,
-  isAccountExists
+  isAccountExists,
+  doesAliasBelongToUser
 };

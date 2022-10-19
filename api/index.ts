@@ -9,8 +9,10 @@ import http from 'http';
 import mongoose from 'mongoose';
 import dotenv from 'dotenv';
 import * as userValidator from '../user/middleware';
+import * as aliasValidator from '../alias/middleware';
 import {userRouter} from '../user/router';
 import {freetRouter} from '../freet/router';
+import {aliasRouter} from '../alias/router';
 
 // Load environmental variables
 dotenv.config({});
@@ -76,6 +78,7 @@ app.get('/', (req: Request, res: Response) => {
 // Add routers from routes folder
 app.use('/api/users', userRouter);
 app.use('/api/freets', freetRouter);
+app.use('/api/users/alias', aliasRouter);
 
 // Catch all the other routes and display error message
 app.all('*', (req: Request, res: Response) => {

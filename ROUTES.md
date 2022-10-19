@@ -151,7 +151,7 @@ This renders the `index.html` file that will be used to interact with the backen
 
 ---
 
-### 'POST /api/alias/session' - log alias in
+### 'POST /api/users/alias/session' - log alias in
 
 **Returns**
 
@@ -163,8 +163,19 @@ This renders the `index.html` file that will be used to interact with the backen
 - '401' if alias name login credentials are invalid
 - '403' if alias already signed in
 
+### 'GET /api/users/alias'
 
-### 'DELETE /api/alias/session' - log alias out
+**Returns**
+
+- A message containing: active alias, all user aliases of the current session, and names of all aliases
+- Array of aliases belonging to user
+
+**Throws**
+
+- '403' if user is not signed in
+
+
+### 'DELETE /api/users/alias/session' - log alias out
 
 **Returns**
 
@@ -175,7 +186,7 @@ This renders the `index.html` file that will be used to interact with the backen
 - '403' if alias is not logged in
 
 
-### 'POST /api/alias' - create alias account
+### 'POST /api/users/alias' - create alias account
 
 **Returns**
 
@@ -188,7 +199,7 @@ This renders the `index.html` file that will be used to interact with the backen
 - '409' if aliasname already taken
 
 
-### 'PUT /api/alias' - Update alias account
+### 'PUT /api/users/alias' - Update alias account
 
 **Returns**
 
@@ -200,7 +211,7 @@ This renders the `index.html` file that will be used to interact with the backen
 - '403' if there is an alias already logged in
 - '409' if aliasname already taken
 
-### 'DELETE /api/alias' - Delete alias
+### 'DELETE /api/users/alias' - Delete alias
 
 **Returns**
 

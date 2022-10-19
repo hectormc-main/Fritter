@@ -7,6 +7,7 @@
   <link rel="stylesheet" href="/stylesheets/style.css">
   <script src="/scripts/freet.js"></script>
   <script src="/scripts/user.js"></script>
+  <script src="/scripts/alias.js"></script>
   <script src="/scripts/index.js"></script>
 </head>
 
@@ -19,6 +20,12 @@
     <section id="operations-container">
       <h2>Operations:</h2>
       <div class="scrollbox">
+
+        <div>
+          <h1>USERS</h1>
+          -----------------------------------------------------
+        </div>
+
         <form id="create-user">
           <h3>Create User</h3>
           <div>
@@ -72,6 +79,31 @@
           <h3>Sign Out</h3>
           <input type="submit" value="Sign out">
         </form>
+
+        <div>
+          <h1>ALIASES</h1>
+          -----------------------------------------------------
+        </div>
+
+        <form id="create-alias">
+          <h3>Create Alias</h3>
+          <div>
+            <label for="aliasname">Aliasname:</label>
+            <input id="aliasname" name="aliasname">
+          </div>
+          <input type="submit" value="Create Alias">
+        </form>
+
+        <form id="get-aliases-of-user">
+          <h3>Get your aliases</h3>
+          <input type="submit" value="Get Aliases">
+        </form>
+
+
+        <div>
+          <h1>FREETS</h1>
+          ----------------------------------------------------
+        </div>
 
         <form id="view-all-freets">
             <h3>View All Freets</h3>

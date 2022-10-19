@@ -4,7 +4,18 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="2e4d8e62-60cf-4542-b95b-7db02499f899" name="Changes" comment="" />
+    <list default="true" id="2e4d8e62-60cf-4542-b95b-7db02499f899" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ROUTES.md" beforeDir="false" afterPath="$PROJECT_DIR$/ROUTES.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/alias/collection.ts" beforeDir="false" afterPath="$PROJECT_DIR$/alias/collection.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/alias/middleware.ts" beforeDir="false" afterPath="$PROJECT_DIR$/alias/middleware.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/alias/model.ts" beforeDir="false" afterPath="$PROJECT_DIR$/alias/model.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/alias/router.ts" beforeDir="false" afterPath="$PROJECT_DIR$/alias/router.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/alias/util.ts" beforeDir="false" afterPath="$PROJECT_DIR$/alias/util.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/api/index.ts" beforeDir="false" afterPath="$PROJECT_DIR$/api/index.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/public/index.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/scripts/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/public/scripts/index.js" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -15,6 +26,9 @@
   </component>
   <component name="MarkdownSettingsMigration">
     <option name="stateVersion" value="1" />
+  </component>
+  <component name="ProblemsViewState">
+    <option name="selectedTabId" value="ProjectErrors" />
   </component>
   <component name="ProjectId" id="2GEzJdwAOrRyVoEgeD55saBOsEa" />
   <component name="ProjectLevelVcsManager">
@@ -39,7 +53,7 @@
     "node.js.selected.package.tslint": "(autodetect)",
     "nodejs_package_manager_path": "npm",
     "settings.editor.selected.configurable": "preferences.sourceCode.JavaScript",
-    "ts.external.directory.path": "/home/hector/.local/share/JetBrains/Toolbox/apps/WebStorm/ch-0/222.3739.57/plugins/JavaScriptLanguage/jsLanguageServicesImpl/external",
+    "ts.external.directory.path": "/home/hector/Documents/School/6.1040/Fritter/node_modules/typescript/lib",
     "vue.rearranger.settings.migration": "true"
   }
 }]]></component>
@@ -58,7 +72,8 @@
       <updated>1665968460730</updated>
       <workItem from="1665968461897" duration="1872000" />
       <workItem from="1665972306064" duration="3798000" />
-      <workItem from="1666023456363" duration="11529000" />
+      <workItem from="1666023456363" duration="14791000" />
+      <workItem from="1666132566539" duration="13328000" />
     </task>
     <servers />
   </component>

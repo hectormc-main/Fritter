@@ -11,12 +11,11 @@ type AliasResponse = {
 /**
  * Transform a raw Alias object from the database into an object
  * with all the information needed by the frontend
- * (in this case, removing the password for security)
  *
  * @param {HydratedDocument<Alias>} alias - A Alias object
  * @returns {AliasResponse} - The alias object
  */
-const constructAliasResponse = (alias: HydratedDocument<Alias>): AliasResponse => {
+const constructAliasResponse = (alias: HydratedDocument<Alias>): { aliasname: string; _id: string; userId: string } => {
   const aliasCopy: Alias = {
     ...alias.toObject({
       versionKey: false // Cosmetics; prevents returning of __v property
@@ -24,7 +23,9 @@ const constructAliasResponse = (alias: HydratedDocument<Alias>): AliasResponse =
   };
   return {
     ...aliasCopy,
-    _id: aliasCopy._id.toString()
+    _id: aliasCopy._id.toString(),
+    aliasname: aliasCopy.aliasname.toString(),
+    userId: aliasCopy.userId.toString()
   };
 };
 

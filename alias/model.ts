@@ -3,7 +3,7 @@ import {Schema, model} from 'mongoose';
 
 export type Alias = {
   _id: Types.ObjectId; // MongoDB assigns each object this ID on creation
-  userId: Types.ObjectId;  // the user in which this alias is associated with
+  userId: Types.ObjectId; // The user in which this alias is associated with
   aliasname: string;
 };
 

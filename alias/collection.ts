@@ -37,6 +37,16 @@ class AliasCollection {
   }
 
   /**
+   * Find all aliases belonging to userId
+   *
+   * @param {string} userId - userId of alias owner
+   * @return {Promise<Array<HydratedDocument<Alias>>> | Promise<null>} - The aliases belonging to userId
+   */
+  static async findAllByUserId(userId: string): Promise<Array<HydratedDocument<Alias>>> {
+    return AliasModel.find({userId});
+  }
+
+  /**
    * Find an alias by aliasname (case insensitive).
    *
    * @param {string} aliasname - The aliasname of the alias to find
