@@ -44,7 +44,9 @@ const formsAndHandlers = {
   'delete-freet': deleteFreet,
   'view-freet': viewFreet, // Add to formsAndHandlers to interact with on frontend
   'create-alias': createAlias,
-  'get-aliases-of-user': getAliases
+  'get-aliases-of-user': getAliases,
+  'sign-in-alias': signInAlias,
+  'sign-out-alias': signOutAlias
 };
 
 // Attach handlers to forms

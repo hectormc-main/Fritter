@@ -10,6 +10,36 @@ import UserCollection from '../user/collection';
 const router = express.Router();
 
 /**
+ * Create an alias account.
+ *
+ * @name POST /api/users/alias
+ *
+ * @param {string} aliasname - aliasname of Alias
+ * @return {AliasResponse} - The created alias
+ * @throws {403} - If there is an alias already logged in
+ * @throws {409} - If aliasname is already taken
+ * @throws {400} - If password or username is not in correct format
+ *
+ */
+router.post(
+  '/',
+  [
+    aliasValidator.isValidAliasname,
+    aliasValidator.isAliasnameNotAlreadyInUse,
+    userValidator.isUserLoggedIn
+  ],
+  async (req: Request, res: Response) => {
+    const userId = (req.session.userId as string) ?? ''; // Will not be an empty string since its validated in isUserLoggedIn
+    const alias = await AliasCollection.addOne(userId, req.body.aliasname);
+    req.session.aliasId = alias._id.toString();
+    res.status(201).json({
+      message: `Your account was created successfully. You have been logged in as ${alias.aliasname}`,
+      alias: util.constructAliasResponse(alias)
+    });
+  }
+);
+
+/**
  * Sign in Alias.
  *
  * @name POST /api/user/alias/session
@@ -26,12 +56,12 @@ router.post(
   [
     aliasValidator.isAliasLoggedOut,
     aliasValidator.isValidAliasname,
-    aliasValidator.isAccountExists
+    aliasValidator.isAccountExists,
+    aliasValidator.isAliasBelongToUser
   ],
   async (req: Request, res: Response) => {
-    const alias = await AliasCollection.findOneByAliasname(
-      req.body.aliasname
-    );
+    const alias = await AliasCollection.findOneByAliasname(req.body.aliasname);
+
     req.session.aliasId = alias._id.toString();
     res.status(201).json({
       message: 'You have logged in successfully',
@@ -63,37 +93,7 @@ router.delete(
 );
 
 /**
- * Create an alias account.
- *
- * @name POST /api/users/alias
- *
- * @param {string} aliasname - aliasname of Alias
- * @return {AliasResponse} - The created alias
- * @throws {403} - If there is an alias already logged in
- * @throws {409} - If aliasname is already taken
- * @throws {400} - If password or username is not in correct format
- *
- */
-router.post(
-  '/',
-  [
-    aliasValidator.isValidAliasname,
-    aliasValidator.isAliasnameNotAlreadyInUse,
-    userValidator.isUserLoggedIn
-  ],
-  async (req: Request, res: Response) => {
-    const userId = (req.session.userId as string) ?? ''; // Will not be an empty string since its validated in isUserLoggedIn
-    const alias = await AliasCollection.addOne(userId, req.body.aliasname);
-    req.session.aliasId = alias._id.toString();
-    res.status(201).json({
-      message: `Your account was created successfully. You have been logged in as ${alias.aliasname}`,
-      alias: util.constructAliasResponse(alias)
-    });
-  }
-);
-
-/**
- * Get all aliases and currently active alias if active
+ * Get all aliases
  *
  * @name GET /api/users/alias
  *

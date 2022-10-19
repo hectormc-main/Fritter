@@ -151,24 +151,21 @@ This renders the `index.html` file that will be used to interact with the backen
 
 ---
 
-### 'POST /api/users/alias/session' - log alias in
+### 'POST /api/users/alias/session' - Sign in to alias
 
 **Returns**
 
-- A success message
+- Success message
 
 **Throws**
 
-- '400' if aliasname name is not correct format or missing in the req
-- '401' if alias name login credentials are invalid
-- '403' if alias already signed in
+- '403' if alias does not belong to session user
 
 ### 'GET /api/users/alias'
 
 **Returns**
 
-- A message containing: active alias, all user aliases of the current session, and names of all aliases
-- Array of aliases belonging to user
+- A message containing all aliasnames of the session's user
 
 **Throws**
 
