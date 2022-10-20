@@ -75,10 +75,6 @@ class FreetCollection {
       freet.views += 1;
     }
 
-    if (freetDetails.proliferate) {
-      freet.proliferate_amount += 1;
-    }
-
     if (freetDetails.content) {
       freet.content = freetDetails.content as string;
     }
