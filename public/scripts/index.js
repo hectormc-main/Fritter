@@ -48,7 +48,9 @@ const formsAndHandlers = {
   'sign-in-alias': signInAlias,
   'sign-out-alias': signOutAlias,
   'update-aliasname': updateAliasname,
-  'delete-alias': deleteAlias
+  'delete-alias': deleteAlias,
+  'proliferate-content': createProliferate,
+  'unproliferate-content': deleteProliferate
 };
 
 // Attach handlers to forms

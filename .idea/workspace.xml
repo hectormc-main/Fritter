@@ -5,15 +5,10 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="2e4d8e62-60cf-4542-b95b-7db02499f899" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/proliferate/middleware.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/proliferate/router.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/proliferate/util.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/scripts/proliferate.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/alias/router.ts" beforeDir="false" afterPath="$PROJECT_DIR$/alias/router.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/freet/collection.ts" beforeDir="false" afterPath="$PROJECT_DIR$/freet/collection.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/proliferate/collection.ts" beforeDir="false" afterPath="$PROJECT_DIR$/proliferate/collection.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/proliferate/models.ts" beforeDir="false" afterPath="$PROJECT_DIR$/proliferate/model.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/public/index.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/scripts/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/public/scripts/index.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
