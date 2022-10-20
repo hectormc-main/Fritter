@@ -25,7 +25,7 @@ const FreetSchema = new Schema<Freet>({
     // Use Types.ObjectId outside of the schema
     type: Schema.Types.ObjectId,
     required: true,
-    ref: 'User'
+    ref: 'Alias'
   },
   // The date the freet was created
   dateCreated: {

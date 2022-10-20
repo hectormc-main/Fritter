@@ -171,7 +171,7 @@ router.delete(
     const {aliasname} = req.body; // Will not be an empty string since its validated in isValidAliasname
     const alias = await AliasCollection.findOneByAliasname(aliasname);
     await AliasCollection.deleteOne(alias._id);
-    // Await FreetCollection.deleteMany(aliasId);
+    await FreetCollection.deleteMany(alias._id);
     if (req.session.aliasId === alias._id.toString()) {
       req.session.aliasId = undefined;
     }
