@@ -2,6 +2,7 @@ import type {HydratedDocument, Types} from 'mongoose';
 import type {Freet} from './model';
 import FreetModel from './model';
 import AliasCollection from '../alias/collection';
+import ProliferateModel from "../proliferate/model";
 
 /**
  * This files contains a class that has the functionality to explore freets
@@ -92,6 +93,7 @@ class FreetCollection {
    */
   static async deleteOne(freetId: Types.ObjectId | string): Promise<boolean> {
     const freet = await FreetModel.deleteOne({_id: freetId});
+    await ProliferateModel.deleteOne({contentId: freetId});
     return freet !== null;
   }
 
@@ -102,6 +104,7 @@ class FreetCollection {
    */
   static async deleteMany(authorId: Types.ObjectId | string): Promise<void> {
     await FreetModel.deleteMany({authorId});
+    // TODO delete all freets by this author
   }
 }
 

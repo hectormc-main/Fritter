@@ -113,7 +113,7 @@ To add a resource or edit functionality of an existing resource:
 
 - Create/modify files in the four above categories, making sure you have one model file, one collection one router file, and one middleware file per resource.
   - It helps to go in the order that they're listed above, starting with the resource's datatype.
-- In `freet/utils.ts` and `user/utils.ts` there are type definitions for frontend representations of resources, and functions to convert from a backend resource type. Create/modify these as necessary.
+- In `freet/util.ts` and `user/util.ts` there are type definitions for frontend representations of resources, and functions to convert from a backend resource type. Create/modify these as necessary.
   - An example: the frontend type definition for User lacks a `password` property, because the frontend should never be receiving users' passwords.
 
 ### Frontend

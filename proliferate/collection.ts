@@ -1,6 +1,6 @@
 import type {HydratedDocument, Types} from 'mongoose';
-import type {Proliferate} from './models';
-import ProliferateModel from './models';
+import type {Proliferate} from './model';
+import ProliferateModel from './model';
 import FreetModel from '../freet/model';
 
 /**
@@ -9,6 +9,8 @@ import FreetModel from '../freet/model';
  * for searching, and ability to delete.
  */
 class ProliferateCollection {
+  // CREATION
+
   /**
    * Add a new proliferate to database
    *
@@ -21,6 +23,8 @@ class ProliferateCollection {
     await proliferate.save(); // Save Proliferate to MongoDB
     return proliferate;
   }
+
+  // FINDING
 
   /**
    * Find the proliferate the alias did on content
@@ -49,6 +53,8 @@ class ProliferateCollection {
   static async findAllByAliasId(aliasId: Types.ObjectId | string): Promise<Array<HydratedDocument<Proliferate>>> {
     return ProliferateModel.find({aliasId});
   }
+
+  // DELETION
 
   /**
    * Delete the proliferate the Alias did on a specific piece of content
@@ -79,3 +85,5 @@ class ProliferateCollection {
     await ProliferateModel.deleteMany({contentId});
   }
 }
+
+export default ProliferateCollection;
