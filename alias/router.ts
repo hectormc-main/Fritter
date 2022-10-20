@@ -106,43 +106,39 @@ router.get('/',
     userValidator.isUserLoggedIn
   ],
   async (req: Request, res: Response) => {
-    let message = '';
+    let aliasname = '';
     if (req.session.aliasId !== undefined) {
-      const aliasId = (req.session.aliasId as string) ?? ''; // Will not be an empty string since its validated in isUserLoggedIn
-      const alias = await AliasCollection.findOneByAliasId(aliasId);
-      message += `You are currently loggid in as ${alias.aliasname}\n`;
+      const alias = await AliasCollection.findOneByAliasId(req.session.aliasId);
+      console.log(alias);
+      aliasname = alias.aliasname;
     }
 
     const userId = (req.session.userId as string) ?? '';
     const aliases = await AliasCollection.findAllByUserId(userId);
-    const response = aliases.map(a => a.aliasname);
-
-    message += `These are you current aliases: ${response.toString()}`;
+    const aliasnames = aliases.map(a => a.aliasname);
 
     res.status(200).json({
-      message
+      message: 'Successfully retrieved aliases',
+      currentAlias: aliasname,
+      allAliases: aliasnames
     });
   });
 
 /**
- * Update a user's profile.
+ * Update an alias's aliasname
  *
  * @name PUT /api/users/alias
  *
  * @param {string} aliasname - The user's new aliasname
  * @return {UserResponse} - The updated alias
- * @throws {403} - If user is not logged in
+ * @throws {403} - If Alias is not logged in
  * @throws {409} - If aliasname already taken
- * @throws {400} - If aliasname or userId are not of the correct format
+ * @throws {400} - If aliasname is not of the correct format
  */
 router.put(
   '/',
   [
-    userValidator.isUserLoggedIn,
-    userValidator.isValidUsername,
-    userValidator.isUsernameNotAlreadyInUse,
-    userValidator.isValidPassword,
-    aliasValidator.isAliasLoggedOut,
+    aliasValidator.isAliasLoggedIn,
     aliasValidator.isValidAliasname,
     aliasValidator.isAliasnameNotAlreadyInUse
   ],
@@ -150,8 +146,8 @@ router.put(
     const aliasId = (req.session.aliasId as string) ?? ''; // Will not be an empty string since its validated in isUserLoggedIn
     const alias = await AliasCollection.updateOne(aliasId, req.body);
     res.status(200).json({
-      message: 'Your profile was updated successfully.',
-      alias: util.constructAliasResponse(alias)
+      message: 'Your aliasname was updated successfully.',
+      alias
     });
   }
 );
@@ -168,15 +164,18 @@ router.delete(
   '/',
   [
     userValidator.isUserLoggedIn,
-    aliasValidator.isAliasLoggedOut,
     aliasValidator.isValidAliasname,
-    aliasValidator.isAliasnameNotAlreadyInUse
+    aliasValidator.isAliasBelongToUser
   ],
   async (req: Request, res: Response) => {
-    const aliasId = (req.session.aliasId as string) ?? ''; // Will not be an empty string since its validated in isUserLoggedIn
-    await AliasCollection.deleteOne(aliasId);
-    await FreetCollection.deleteMany(aliasId);
-    req.session.aliasId = undefined;
+    const {aliasname} = req.body; // Will not be an empty string since its validated in isValidAliasname
+    const alias = await AliasCollection.findOneByAliasname(aliasname);
+    await AliasCollection.deleteOne(alias._id);
+    // Await FreetCollection.deleteMany(aliasId);
+    if (req.session.aliasId === alias._id.toString()) {
+      req.session.aliasId = undefined;
+    }
+
     res.status(200).json({
       message: 'Your alias has been deleted successfully.'
     });

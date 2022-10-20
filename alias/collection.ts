@@ -33,7 +33,7 @@ class AliasCollection {
    * @return {Promise<HydratedDocument<Alias>> | Promise<null>} - The alias with the given aliasname, if any
    */
   static async findOneByAliasId(aliasId: string): Promise<HydratedDocument<Alias>> {
-    return AliasModel.findOne({_id: new RegExp(`^${aliasId.trim()}$`, 'i')});
+    return AliasModel.findOne({_id: aliasId});
   }
 
   /**

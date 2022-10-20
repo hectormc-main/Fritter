@@ -16,6 +16,16 @@ function getAliases(fields) {
     .catch(showResponse);
 }
 
+function updateAliasname(fields) {
+  fetch('/api/users/alias',
+    {method: 'PUT',
+      body: JSON.stringify(fields),
+      headers: {'Content-Type': 'application/json'}
+    })
+    .then(showResponse)
+    .catch(showResponse);
+}
+
 function signInAlias(fields) {
   fetch('/api/users/alias/session',
     {method: 'POST',
@@ -29,6 +39,16 @@ function signInAlias(fields) {
 function signOutAlias(fields) {
   fetch('/api/users/alias/session',
     {method: 'DELETE'
+    })
+    .then(showResponse)
+    .catch(showResponse);
+}
+
+function deleteAlias(fields) {
+  fetch('/api/users/alias',
+    {method: 'DELETE',
+      body: JSON.stringify(fields),
+      headers: {'Content-Type': 'application/json'}
     })
     .then(showResponse)
     .catch(showResponse);

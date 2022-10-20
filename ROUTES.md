@@ -196,16 +196,16 @@ This renders the `index.html` file that will be used to interact with the backen
 - '409' if aliasname already taken
 
 
-### 'PUT /api/users/alias' - Update alias account
+### 'PUT /api/users/alias' - Update alias's aliasname
 
 **Returns**
 
-- The updated alias
+- Success Message
 
 **Throws**
 
-- '400' if aliasname or userId not in correct format
-- '403' if there is an alias already logged in
+- '400' if aliasname is not in valid format
+- '403' if you are not logged in to an alias
 - '409' if aliasname already taken
 
 ### 'DELETE /api/users/alias' - Delete alias

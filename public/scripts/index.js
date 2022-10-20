@@ -46,7 +46,9 @@ const formsAndHandlers = {
   'create-alias': createAlias,
   'get-aliases-of-user': getAliases,
   'sign-in-alias': signInAlias,
-  'sign-out-alias': signOutAlias
+  'sign-out-alias': signOutAlias,
+  'update-aliasname': updateAliasname,
+  'delete-alias': deleteAlias
 };
 
 // Attach handlers to forms
