@@ -20,7 +20,7 @@ The following api routes have already been implemented for you (**Make sure to d
 **Throws**
 
 - `403` if the user is already logged in
-- `400` if username or password is not in correct format format or missing in the req
+- `400` if username or password is not in correct format or missing in the req
 - `401` if the user login credentials are invalid
 
 #### `DELETE /api/users/session` - Sign out user
@@ -33,7 +33,7 @@ The following api routes have already been implemented for you (**Make sure to d
 
 - `403` if user is not logged in
 
-#### `POST /api/users` - Create an new user account
+#### `POST /api/users` - Create a new user account
 
 **Body**
 
@@ -195,7 +195,7 @@ This renders the `index.html` file that will be used to interact with the backen
 **Returns**
 
 - A success message
-- A object with the created freet
+- An object with the created freet
 
 **Throws**
 
@@ -388,7 +388,7 @@ This renders the `index.html` file that will be used to interact with the backen
 
 **Returns**
 
-- List of content in chronological order based on who you follow
+- List of content in chronological order based on whom you follow
 
 **Throws**
 
@@ -467,7 +467,7 @@ This renders the `index.html` file that will be used to interact with the backen
 # Usage Alerts
 ---
 
-### 'POST /api/alerts' - create a new alert
+### 'POST /api/usage_alerts' - create a new alert
 
 **Returns**
 
@@ -481,7 +481,7 @@ This renders the `index.html` file that will be used to interact with the backen
 - Identical alert already exists
 
 
-### 'GET /api/alerts' - get all alerts for your alias
+### 'GET /api/usage_alerts' - get all alerts for your alias
 
 **Returns**
 
