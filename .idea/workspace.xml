@@ -5,6 +5,9 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="2e4d8e62-60cf-4542-b95b-7db02499f899" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/proliferate/collection.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/proliferate/models.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/ROUTES.md" beforeDir="false" afterPath="$PROJECT_DIR$/ROUTES.md" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />

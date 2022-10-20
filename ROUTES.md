@@ -432,11 +432,29 @@ This renders the `index.html` file that will be used to interact with the backen
 
 
 
+# Profile
+---
+
+### 'GET /api/profiles/:aliasId' - Get all freets by alias
+
+**Returns**
+
+- A success message
+- List of freets by alias
+
+**Returns**
+
+- Other alias does not exist
+
+
+
+
 
 # Musical Profiles
 ---
 
-### 'POST /api/music' - add playlist to your profile
+### 'POST /api/profiles/:aliasId/music' - add playlist to your profile
+does this need :aliasId?
 
 **Returns**
 
@@ -448,7 +466,7 @@ This renders the `index.html` file that will be used to interact with the backen
 - Invalid playlist (URL?)
 
 
-### 'GET /api/music' - add playlist to active playlist
+### 'GET /api/profiles/:aliasId/music' - add playlist to active playlist
 
 **Returns**
 
@@ -467,7 +485,7 @@ This renders the `index.html` file that will be used to interact with the backen
 # Usage Alerts
 ---
 
-### 'POST /api/usage_alerts' - create a new alert
+### 'POST /api/profiles/usage_alerts' - create a new alert
 
 **Returns**
 
