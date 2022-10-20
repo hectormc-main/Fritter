@@ -6,12 +6,12 @@
   <component name="ChangeListManager">
     <list default="true" id="2e4d8e62-60cf-4542-b95b-7db02499f899" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/alias/router.ts" beforeDir="false" afterPath="$PROJECT_DIR$/alias/router.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ROUTES.md" beforeDir="false" afterPath="$PROJECT_DIR$/ROUTES.md" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/freet/collection.ts" beforeDir="false" afterPath="$PROJECT_DIR$/freet/collection.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/freet/middleware.ts" beforeDir="false" afterPath="$PROJECT_DIR$/freet/middleware.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/freet/model.ts" beforeDir="false" afterPath="$PROJECT_DIR$/freet/model.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/freet/router.ts" beforeDir="false" afterPath="$PROJECT_DIR$/freet/router.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/public/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/public/index.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/scripts/freet.js" beforeDir="false" afterPath="$PROJECT_DIR$/public/scripts/freet.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/scripts/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/public/scripts/index.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />

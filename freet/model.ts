@@ -14,6 +14,7 @@ export type Freet = {
   content: string;
   dateModified: Date;
   views: number; // Add a new field called "views" with the number type to the interface
+  proliferate_amount: number;
 };
 
 // Mongoose schema definition for interfacing with a MongoDB table
@@ -44,6 +45,10 @@ const FreetSchema = new Schema<Freet>({
   },
   // Add views field to the schema
   views: {
+    type: Number,
+    default: 0
+  },
+  proliferate_amount: {
     type: Number,
     default: 0
   }

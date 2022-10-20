@@ -2,6 +2,9 @@
 
 The following api routes have already been implemented for you (**Make sure to document all the routes that you have added.**):
 
+
+# FREETS
+
 #### `GET /`
 
 This renders the `index.html` file that will be used to interact with the backend
@@ -12,16 +15,16 @@ This renders the `index.html` file that will be used to interact with the backen
 
 - An array of all freets sorted in descending order by date modified
 
-#### `GET /api/freets?author=USERNAME` - Get freets by author
+#### `GET /api/freets?author=ALIASNAME` - Get freets by author
 
 **Returns**
 
-- An array of freets created by user with username `author`
+- An array of freets created by alias with aliasname `author`
 
 **Throws**
 
 - `400` if `author` is not given
-- `404` if `author` is not a recognized username of any user
+- `404` if `author` is not a recognized aliasname of any alias
 
 #### `POST /api/freets` - Create a new freet
 
@@ -36,7 +39,7 @@ This renders the `index.html` file that will be used to interact with the backen
 
 **Throws**
 
-- `403` if the user is not logged in
+- `403` if the alias is not logged in
 - `400` If the freet content is empty or a stream of empty spaces
 - `413` If the freet content is more than 140 characters long
 
@@ -48,8 +51,8 @@ This renders the `index.html` file that will be used to interact with the backen
 
 **Throws**
 
-- `403` if the user is not logged in
-- `403` if the user is not the author of the freet
+- `403` if the alias is not logged in
+- `403` if the alias is not the author of the freet
 - `404` if the freetId is invalid
 
 #### `PUT /api/freets/:freetId?` - Update an existing freet
@@ -65,11 +68,19 @@ This renders the `index.html` file that will be used to interact with the backen
 
 **Throws**
 
-- `403` if the user is not logged in
+- `403` if the alias is not logged in
 - `404` if the freetId is invalid
-- `403` if the user is not the author of the freet
+- `403` if the alias is not the author of the freet
 - `400` if the new freet content is empty or a stream of empty spaces
 - `413` if the new freet content is more than 140 characters long
+
+
+###
+
+
+
+
+# USERS
 
 #### `POST /api/users/session` - Sign in user
 
@@ -147,7 +158,13 @@ This renders the `index.html` file that will be used to interact with the backen
 
 
 
-# Alias
+
+
+
+
+
+
+# ALIAS
 
 ---
 

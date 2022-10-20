@@ -43,6 +43,7 @@ const formsAndHandlers = {
   'edit-freet': editFreet,
   'delete-freet': deleteFreet,
   'view-freet': viewFreet, // Add to formsAndHandlers to interact with on frontend
+  'proliferate-freet': proliferateFreet,
   'create-alias': createAlias,
   'get-aliases-of-user': getAliases,
   'sign-in-alias': signInAlias,

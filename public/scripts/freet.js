@@ -42,3 +42,10 @@ function viewFreet(fields) {
     .then(showResponse)
     .catch(showResponse);
 }
+
+function proliferateFreet(fields) {
+  body = {...fields, proliferate: true};
+  fetch(`/api/freets/${fields.id}`, {method: 'PUT', body: JSON.stringify(body), headers: {'Content-Type': 'application/json'}})
+    .then(showResponse)
+    .catch(showResponse);
+}
