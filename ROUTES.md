@@ -283,7 +283,7 @@ This renders the `index.html` file that will be used to interact with the backen
 # Reactions
 ---
 
-### 'POST /api/reactions' - React to the freet
+### 'POST /api/reactions/:contentId' - React to the freet
 
 **Returns**
 

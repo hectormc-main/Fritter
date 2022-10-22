@@ -3,7 +3,7 @@ import {Schema, model} from 'mongoose';
 
 export type Proliferate = {
   _id: Types.ObjectId; // MongoDB assigns each object this ID on creation
-  aliasId: Types.ObjectId; // User who proliferated
+  aliasId: Types.ObjectId; // Alias who proliferated
   contentId: Types.ObjectId; // Content that was proliferated
 };
 

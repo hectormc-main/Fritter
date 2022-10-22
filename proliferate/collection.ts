@@ -1,7 +1,6 @@
 import type {HydratedDocument, Types} from 'mongoose';
 import type {Proliferate} from './model';
 import ProliferateModel from './model';
-import FreetModel from '../freet/model';
 
 /**
  * This file contains a class with functionality to interact with Proliferates stored in
@@ -73,7 +72,7 @@ class ProliferateCollection {
    * @param aliasId - The alias to be purged of proliferates
    */
   static async deleteManyByAliasId(aliasId: Types.ObjectId | string): Promise<void> {
-    await FreetModel.deleteMany({aliasId});
+    await ProliferateModel.deleteMany({aliasId});
   }
 
   /**

@@ -3,13 +3,12 @@ import express from 'express';
 import ProliferateCollection from './collection';
 import * as proliferateValidator from './middleware';
 import * as aliasValidator from '../alias/middleware';
-import AliasCollection from '../alias/collection';
 import * as util from './util';
 
 const router = express.Router();
 
 /**
- * Create a proliferate object in the database
+ * Create a proliferate entry in the database
  *
  * @name POST /api/proliferate/:id
  *
