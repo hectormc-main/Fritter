@@ -241,7 +241,7 @@ This renders the `index.html` file that will be used to interact with the backen
 # Proliferate
 ---
 
-### 'POST /api/proliferate/:freetId' - Proliferate the freet
+### 'POST /api/proliferate/:contentId' - Proliferate the content (most likely freet)
 
 **Returns**
 
@@ -251,9 +251,19 @@ This renders the `index.html` file that will be used to interact with the backen
 
 - Alias not signed in
 - This alias has already proliferated this freet
-- Freet does not exist
+- Content does not exist
 
-### 'DELETE /api/proliferate/:freetId' - Un-proliferate the freet
+### 'GET /api/proliferate/:contentId' - Get number of proliferates on content
+
+**Returns**
+
+- Number of proliferates on content
+
+**Throws**
+
+- Content does not exist
+
+### 'DELETE /api/proliferate/:contentId' - Un-proliferate the content
 
 **Returns**
 
@@ -263,7 +273,7 @@ This renders the `index.html` file that will be used to interact with the backen
 
 - Alias not signed in
 - Alias has not proliferated this freet
-- Freet does not exist
+- Content does not exist
 
 
 

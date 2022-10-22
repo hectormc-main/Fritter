@@ -11,6 +11,14 @@ function createProliferate(fields) {
     .catch(showResponse);
 }
 
+function getNumProliferates(fields) {
+  fetch(`/api/proliferate/${fields.contentId}`,
+    {method: 'GET'
+    })
+    .then(showResponse)
+    .catch(showResponse);
+}
+
 function deleteProliferate(fields) {
   fetch(`/api/proliferate/${fields.contentId}`,
     {method: 'DELETE',

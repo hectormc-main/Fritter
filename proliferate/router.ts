@@ -15,9 +15,8 @@ const router = express.Router();
  *
  * @param {string} contendId - contentId of content
  * @return {ProliferateResponse} - The created proliferate
- * @throws {403} - If there is an alias already logged in
- * @throws {409} - If aliasname is already taken
- * @throws {400} - If password or username is not in correct format
+ *
+ * TODO throws
  *
  */
 router.post(
@@ -33,6 +32,31 @@ router.post(
     res.status(201).json({
       message: 'You have successfully proliferated',
       alias: util.constructProliferateResponse(proliferate)
+    });
+  }
+);
+
+/**
+ * Get the amount of proliferates on content
+ *
+ * @name GET /api/proliferate/:id
+ *
+ * @param {string} contendId - contentId of content
+ *
+ * TODO throws
+ *
+ */
+router.get(
+  '/:contentId?',
+  [
+    // TODO create does content exist validator. Should be generic and not just find freets
+  ],
+  async (req: Request, res: Response) => {
+    const proliferates = await ProliferateCollection.findAllByContentId(req.params.contentId);
+
+    res.status(201).json({
+      message: `This content has ${proliferates.length} proliferates`,
+      amount: proliferates.length
     });
   }
 );
@@ -58,3 +82,5 @@ router.delete(
     });
   }
 );
+
+export {router as proliferateRouter};

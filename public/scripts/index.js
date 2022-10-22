@@ -50,7 +50,8 @@ const formsAndHandlers = {
   'update-aliasname': updateAliasname,
   'delete-alias': deleteAlias,
   'proliferate-content': createProliferate,
-  'unproliferate-content': deleteProliferate
+  'unproliferate-content': deleteProliferate,
+  'proliferate-amount': getNumProliferates
 };
 
 // Attach handlers to forms

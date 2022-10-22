@@ -14,7 +14,7 @@ const hasAliasNotProliferatedContent = async (req: Request, res: Response, next:
     // TODO pick better code number
     res.status(410).json({
       error: {
-        aliasAlreadyProliferated: `Alias ${aliasId} has already proliferated ${contentId}`
+        aliasAlreadyProliferated: `Alias has already proliferated content`
       }
     });
     return;
@@ -34,7 +34,7 @@ const hasAliasProliferatedContent = async (req: Request, res: Response, next: Ne
   if (!proliferate) {
     res.status(404).json({
       error: {
-        proliferateDoesNotExist: `Alias ${aliasId} has not proliferated ${contentId}`
+        proliferateDoesNotExist: `Alias has not proliferated content`
       }
     });
     return;
