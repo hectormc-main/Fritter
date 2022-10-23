@@ -296,7 +296,7 @@ This renders the `index.html` file that will be used to interact with the backen
 - EmojiId does not exist
 
 
-### 'PUT /api/reactions' - Change reaction to freet
+### 'PUT /api/reactions/:contentId' - Change reaction to content
 
 **Returns**
 
@@ -305,11 +305,11 @@ This renders the `index.html` file that will be used to interact with the backen
 **Throws**
 
 - Alias is not signed in
-- Freet does not exist
+- Content does not exist
 - EmojiId does not exist
 
 
-### 'DELETE /api/reactions' - un-react to the freet
+### 'DELETE /api/reactions' - un-react to the content
 
 **Returns**
 
@@ -320,6 +320,7 @@ This renders the `index.html` file that will be used to interact with the backen
 - Alias not signed in
 - Alias has not reacted this freet
 - Freet does not exist
+- Content does not exist
 
 
 
@@ -329,7 +330,7 @@ This renders the `index.html` file that will be used to interact with the backen
 # Rejection
 ---
 
-### 'POST /api/rejection' - Reject this freet
+### 'POST /api/rejections/:contentId?' - Reject this content
 
 **Returns**
 
@@ -340,9 +341,19 @@ This renders the `index.html` file that will be used to interact with the backen
 - Alias not signed in
 - Freet does not exist
 - Alias has already rejected this freet
+- Content does not exist
 
+### 'GET /api/rejections' - Get all rejections alias has done
 
-### 'DELETE /api/rejection' - un-reject this freet
+**Returns**
+
+- List of all rejection objects
+
+**Throws**
+
+- Alias not signed in
+
+### 'DELETE /api/rejections/:contentId?' - un-reject this freet
 
 **Returns**
 
@@ -353,6 +364,9 @@ This renders the `index.html` file that will be used to interact with the backen
 - Alias not signed in
 - Alias has not rejected this freet
 - Freet does not exist
+- Content does not exist
+
+
 
 
 

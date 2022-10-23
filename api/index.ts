@@ -15,6 +15,7 @@ import {freetRouter} from '../freet/router';
 import {aliasRouter} from '../alias/router';
 import {proliferateRouter} from '../proliferate/router';
 import {reactionRouter} from '../reaction/router';
+import {rejectionRouter} from '../rejection/router';
 
 // Load environmental variables
 dotenv.config({});
@@ -83,6 +84,7 @@ app.use('/api/freets', freetRouter);
 app.use('/api/users/alias', aliasRouter);
 app.use('/api/proliferate', proliferateRouter);
 app.use('/api/reactions', reactionRouter);
+app.use('/api/rejections', rejectionRouter);
 
 // Catch all the other routes and display error message
 app.all('*', (req: Request, res: Response) => {

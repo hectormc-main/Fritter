@@ -10,6 +10,7 @@
   <script src="/scripts/alias.js"></script>
   <script src="/scripts/proliferate.js"></script>
   <script src="scripts/reaction.js"></script>
+  <script src="scripts/rejection.js"></script>
   <script src="/scripts/index.js"></script>
 </head>
 
@@ -268,6 +269,34 @@
             <input id="contentId" name="contentId">
           </div>
           <input type="submit" value="Delete Reaction">
+        </form>
+
+
+        <div>
+          <h1>REJECTIONS</h1>
+        </div>
+
+        <form id="create-rejection">
+          <h3>Reject Content</h3>
+          <div>
+            <label for="contentId">ID:</label>
+            <input id="contentId" name="contentId">
+          </div>
+          <input type="submit" value="Reject the content">
+        </form>
+
+        <form id="get-your-rejections">
+          <h3>Get all rejections you have done</h3>
+          <input type="submit" value="Get rejections">
+        </form>
+
+        <form id="delete-rejection">
+          <h3>Delete your Rejection on Content</h3>
+          <div>
+            <label for="contentId">ID:</label>
+            <input id="contentId" name="contentId">
+          </div>
+          <input type="submit" value="Un-reject the content">
         </form>
 
 

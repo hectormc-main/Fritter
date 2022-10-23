@@ -3,6 +3,7 @@ import express from 'express';
 import ProliferateCollection from './collection';
 import * as proliferateValidator from './middleware';
 import * as aliasValidator from '../alias/middleware';
+import * as contentValidator from '../content/middleware';
 import * as util from './util';
 
 const router = express.Router();
@@ -22,6 +23,7 @@ router.post(
   '/:contentId?',
   [
     aliasValidator.isAliasLoggedIn,
+    contentValidator.doesContentExist,
     proliferateValidator.hasAliasNotProliferatedContent
   ],
   async (req: Request, res: Response) => {
@@ -48,7 +50,7 @@ router.post(
 router.get(
   '/:contentId?',
   [
-    // TODO create does content exist validator. Should be generic and not just find freets
+    contentValidator.doesContentExist
   ],
   async (req: Request, res: Response) => {
     const proliferates = await ProliferateCollection.findAllByContentId(req.params.contentId);
@@ -70,6 +72,7 @@ router.delete(
   '/:contentId?',
   [
     aliasValidator.isAliasLoggedIn,
+    contentValidator.doesContentExist,
     proliferateValidator.hasAliasProliferatedContent
   ],
   async (req: Request, res: Response) => {

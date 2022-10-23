@@ -3,6 +3,7 @@ import express from 'express';
 import ReactionCollection from './collection';
 import * as reactionValidator from './middleware';
 import * as aliasValidator from '../alias/middleware';
+import * as contentValidator from '../content/middleware';
 import * as util from './util';
 
 const router = express.Router();
@@ -22,7 +23,7 @@ router.post(
   '/:contentId?',
   [
     aliasValidator.isAliasLoggedIn,
-    reactionValidator.doesContentExist,
+    contentValidator.doesContentExist,
     reactionValidator.isValidEmojiCode,
     reactionValidator.hasAliasNotReactedToContent
     // TODO additional validators
@@ -47,7 +48,7 @@ router.put(
   '/:contentId?',
   [
     aliasValidator.isAliasLoggedIn,
-    reactionValidator.doesContentExist,
+    contentValidator.doesContentExist,
     reactionValidator.isValidEmojiCode,
     reactionValidator.hasAliasReactedToContent
     // TODO handlers
@@ -74,7 +75,7 @@ router.get(
   '/:contentId?',
   [
     // TODO handlers
-    reactionValidator.doesContentExist
+    contentValidator.doesContentExist
   ],
   async (req: Request, res: Response) => {
     const reactions = await ReactionCollection.findAllByContentId(req.params.contentId);
@@ -94,7 +95,7 @@ router.delete(
   '/:contentId?',
   [
     aliasValidator.isAliasLoggedIn,
-    reactionValidator.doesContentExist,
+    contentValidator.doesContentExist,
     reactionValidator.isValidEmojiCode,
     reactionValidator.hasAliasReactedToContent
     // TODO handlers
