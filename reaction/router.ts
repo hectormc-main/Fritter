@@ -2,6 +2,7 @@ import type {Request, Response} from 'express';
 import express from 'express';
 import ReactionCollection from './collection';
 import * as reactionValidator from './middleware';
+import * as aliasValidator from '../alias/middleware';
 import * as util from './util';
 
 const router = express.Router();
@@ -20,9 +21,10 @@ const router = express.Router();
 router.post(
   '/:contentId?',
   [
-    // No need to check for alias log in as finding reaction does that implicitly
-    reactionValidator.hasAliasNotReactedToContent,
-    reactionValidator.isValidEmojiCode
+    aliasValidator.isAliasLoggedIn,
+    reactionValidator.doesContentExist,
+    reactionValidator.isValidEmojiCode,
+    reactionValidator.hasAliasNotReactedToContent
     // TODO additional validators
   ],
   async (req: Request, res: Response) => {
@@ -30,7 +32,7 @@ router.post(
     const reaction = await ReactionCollection.addOne(aliasId, req.params.contentId, req.body.emojiCode);
 
     res.status(201).json({
-      message: 'You have successfully proliferated',
+      message: 'You have successfully reacted',
       reaction: util.constructReactionResponse(reaction)
     });
   }
@@ -44,8 +46,10 @@ router.post(
 router.put(
   '/:contentId?',
   [
-    reactionValidator.hasAliasReactedToContent,
-    reactionValidator.isValidEmojiCode
+    aliasValidator.isAliasLoggedIn,
+    reactionValidator.doesContentExist,
+    reactionValidator.isValidEmojiCode,
+    reactionValidator.hasAliasReactedToContent
     // TODO handlers
   ],
   async (req: Request, res: Response) => {
@@ -70,6 +74,7 @@ router.get(
   '/:contentId?',
   [
     // TODO handlers
+    reactionValidator.doesContentExist
   ],
   async (req: Request, res: Response) => {
     const reactions = await ReactionCollection.findAllByContentId(req.params.contentId);
@@ -88,8 +93,10 @@ router.get(
 router.delete(
   '/:contentId?',
   [
-    reactionValidator.hasAliasReactedToContent,
-    reactionValidator.isValidEmojiCode
+    aliasValidator.isAliasLoggedIn,
+    reactionValidator.doesContentExist,
+    reactionValidator.isValidEmojiCode,
+    reactionValidator.hasAliasReactedToContent
     // TODO handlers
   ],
   async (req: Request, res: Response) => {
@@ -97,7 +104,7 @@ router.delete(
     await ReactionCollection.deleteOneByAliasIdAndContentId(aliasId, req.params.contentId);
 
     res.status(200).json({
-      message: 'Content successfully unproliferated'
+      message: 'Content successfully unreacted'
     });
   }
 );

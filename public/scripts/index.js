@@ -51,7 +51,7 @@ const formsAndHandlers = {
   'delete-alias': deleteAlias,
   'create-proliferate': createProliferate, // Proliferate
   'get-proliferate': getNumProliferates,
-  'delete-content': deleteProliferate,
+  'delete-proliferate': deleteProliferate,
   'create-reaction': createReaction, // Reaction
   'change-reaction': changeReaction,
   'get-reactions': getReactions,

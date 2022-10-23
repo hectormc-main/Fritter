@@ -1,12 +1,12 @@
 import type {Request, Response, NextFunction} from 'express';
-// Import {Types} from 'mongoose';
+import {Types} from 'mongoose';
 import ReactionCollection from './collection';
+import FreetCollection from '../freet/collection';
 
 /**
  * Checks if the signed in alias has not already reacted the desired content
  */
 const hasAliasNotReactedToContent = async (req: Request, res: Response, next: NextFunction) => {
-  console.log('HII');
   const aliasId = (req.session.aliasId as string) ?? '';
   const contentId = (req.params.contentId) ?? '';
   const reaction = await ReactionCollection.findOneByAliasIdAndContentId(aliasId, contentId);
@@ -46,9 +46,6 @@ const hasAliasReactedToContent = async (req: Request, res: Response, next: NextF
 
 /**
  * Check if req.body.emojiCode corresponds to valid emoji code
- * @param req
- * @param res
- * @param next
  */
 const isValidEmojiCode = async (req: Request, res: Response, next: NextFunction) => {
   const emojiCode = (req.body.emojiCode as string) ?? '';
@@ -57,8 +54,28 @@ const isValidEmojiCode = async (req: Request, res: Response, next: NextFunction)
   next();
 };
 
+/**
+ * Check if req.params.contentId corresponds to valid emoji code
+ */
+const doesContentExist = async (req: Request, res: Response, next: NextFunction) => {
+  const validFormat = Types.ObjectId.isValid(req.params.contentId);
+  const freet = validFormat ? await FreetCollection.findOne(req.params.contentId) : '';
+
+  // Add more checks as more types of content added
+  if (freet) { // Check if freet exists
+    next();
+  } else {
+    res.status(404).json({
+      error: {
+        contentDoesNotExist: `Content with contentId ${req.params.contentId} does not exist`
+      }
+    });
+  }
+};
+
 export {
   hasAliasReactedToContent,
   hasAliasNotReactedToContent,
-  isValidEmojiCode
+  isValidEmojiCode,
+  doesContentExist
 };
