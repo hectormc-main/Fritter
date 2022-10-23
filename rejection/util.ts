@@ -18,7 +18,7 @@ const constructRejectionResponse = (rejection: HydratedDocument<Rejection>): Rej
   return {
     ...rejectionCopy,
     _id: rejectionCopy._id.toString(),
-    followerId: rejectionCopy.followerId.toString(),
+    aliasId: rejectionCopy.aliasId.toString(),
     contentId: rejectionCopy.contentId.toString()
   };
 };

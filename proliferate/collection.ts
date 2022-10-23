@@ -18,7 +18,7 @@ class ProliferateCollection {
    * @return {} Proliferate objects
    */
   static async addOne(aliasId: Types.ObjectId | string, contentId: string): Promise<HydratedDocument<Proliferate>> {
-    const proliferate = new ProliferateModel({aliasId: followerId, contentId});
+    const proliferate = new ProliferateModel({aliasId, contentId});
     await proliferate.save(); // Save Proliferate to MongoDB
     return proliferate;
   }

@@ -8,8 +8,8 @@ import AliasCollection from '../alias/collection';
  * when a alias tries to modify an account in some browser while it has been deleted in another
  */
 const isCurrentSessionAliasExists = async (req: Request, res: Response, next: NextFunction) => {
-  if (req.session.followerId) {
-    const alias = await AliasCollection.findOneByAliasId(req.session.followerId);
+  if (req.session.aliasId) {
+    const alias = await AliasCollection.findOneByAliasId(req.session.aliasId);
 
     if (!alias) {
       req.session.aliasId = undefined;
@@ -174,7 +174,7 @@ const doesAliasBelongToUser = async (req: Request, res: Response, next: NextFunc
  * Checks if the alias is logged in, that is, whether the aliasId is set in session
  */
 const isAliasLoggedIn = (req: Request, res: Response, next: NextFunction) => {
-  if (!req.session.followerId) {
+  if (!req.session.aliasId) {
     res.status(403).json({
       error: {
         auth: 'You must be logged in to complete this action.'
@@ -190,7 +190,7 @@ const isAliasLoggedIn = (req: Request, res: Response, next: NextFunction) => {
  * Checks if the alias is signed out, that is, aliasId is undefined in session
  */
 const isAliasLoggedOut = (req: Request, res: Response, next: NextFunction) => {
-  if (req.session.followerId) {
+  if (req.session.aliasId) {
     res.status(403).json({
       error: 'You are already signed in.'
     });
@@ -211,7 +211,7 @@ const isAliasnameNotAlreadyInUse = async (req: Request, res: Response, next: Nex
 
   // If the current session alias wants to change their aliasname to one which matches
   // the current one irrespective of the case, we should allow them to do so
-  if (!alias || (alias?._id.toString() === req.session.followerId)) {
+  if (!alias || (alias?._id.toString() === req.session.aliasId)) {
     next();
     return;
   }

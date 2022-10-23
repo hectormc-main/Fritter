@@ -66,7 +66,7 @@ router.post(
     freetValidator.isValidFreetContent
   ],
   async (req: Request, res: Response) => {
-    const aliasId = (req.session.followerId as string) ?? ''; // Will not be an empty string since its validated in isAliasLoggedIn
+    const aliasId = (req.session.aliasId as string) ?? ''; // Will not be an empty string since its validated in isAliasLoggedIn
     const freet = await FreetCollection.addOne(aliasId, req.body.content);
 
     res.status(201).json({

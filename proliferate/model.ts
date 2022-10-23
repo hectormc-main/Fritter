@@ -8,7 +8,7 @@ export type Proliferate = {
 };
 
 const ProliferateSchema = new Schema({
-  followerId: {
+  aliasId: {
     type: Schema.Types.ObjectId,
     required: true
   },

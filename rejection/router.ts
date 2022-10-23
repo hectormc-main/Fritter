@@ -27,7 +27,7 @@ router.post(
     rejectionValidator.hasAliasNotRejectedContent
   ],
   async (req: Request, res: Response) => {
-    const aliasId = (req.session.followerId as string) ?? '';
+    const aliasId = (req.session.aliasId as string) ?? '';
     const rejection = await RejectionCollection.addOne(aliasId, req.params.contentId);
 
     res.status(201).json({
@@ -51,7 +51,7 @@ router.get(
     aliasValidator.isAliasLoggedIn
   ],
   async (req: Request, res: Response) => {
-    const rejections = await RejectionCollection.findAllByAliasId(req.session.followerId);
+    const rejections = await RejectionCollection.findAllByAliasId(req.session.aliasId);
 
     res.status(201).json({
       rejections
@@ -73,7 +73,7 @@ router.delete(
     rejectionValidator.hasAliasRejectedContent
   ],
   async (req: Request, res: Response) => {
-    const aliasId = (req.session.followerId as string) ?? '';
+    const aliasId = (req.session.aliasId as string) ?? '';
     await RejectionCollection.deleteOneByAliasIdAndContentId(aliasId, req.params.contentId);
 
     res.status(200).json({

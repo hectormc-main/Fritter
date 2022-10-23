@@ -5,14 +5,7 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="2e4d8e62-60cf-4542-b95b-7db02499f899" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/follow/collection.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/follow/middleware.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/follow/model.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/follow/router.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/follow/util.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ROUTES.md" beforeDir="false" afterPath="$PROJECT_DIR$/ROUTES.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/alias/collection.ts" beforeDir="false" afterPath="$PROJECT_DIR$/alias/collection.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/alias/middleware.ts" beforeDir="false" afterPath="$PROJECT_DIR$/alias/middleware.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/alias/router.ts" beforeDir="false" afterPath="$PROJECT_DIR$/alias/router.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/freet/middleware.ts" beforeDir="false" afterPath="$PROJECT_DIR$/freet/middleware.ts" afterDir="false" />
@@ -92,7 +85,7 @@
       <workItem from="1666023456363" duration="14791000" />
       <workItem from="1666132566539" duration="13328000" />
       <workItem from="1666402815664" duration="10696000" />
-      <workItem from="1666486675312" duration="17004000" />
+      <workItem from="1666486675312" duration="17765000" />
     </task>
     <servers />
   </component>

@@ -29,7 +29,7 @@ router.post(
     // TODO additional validators
   ],
   async (req: Request, res: Response) => {
-    const aliasId = (req.session.followerId as string) ?? '';
+    const aliasId = (req.session.aliasId as string) ?? '';
     const reaction = await ReactionCollection.addOne(aliasId, req.params.contentId, req.body.emojiCode);
 
     res.status(201).json({
@@ -54,7 +54,7 @@ router.put(
     // TODO handlers
   ],
   async (req: Request, res: Response) => {
-    const aliasId = (req.session.followerId as string) ?? '';
+    const aliasId = (req.session.aliasId as string) ?? '';
     const reaction = await ReactionCollection.updateOne(aliasId, req.params.contentId, req.body.emojiCode);
 
     res.status(200).json({
@@ -101,7 +101,7 @@ router.delete(
     // TODO handlers
   ],
   async (req: Request, res: Response) => {
-    const aliasId = (req.session.followerId as string) ?? '';
+    const aliasId = (req.session.aliasId as string) ?? '';
     await ReactionCollection.deleteOneByAliasIdAndContentId(aliasId, req.params.contentId);
 
     res.status(200).json({

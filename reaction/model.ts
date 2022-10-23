@@ -9,7 +9,7 @@ export type Reaction = {
 };
 
 const ReactionSchema = new Schema({
-  followerId: {
+  aliasId: {
     type: Schema.Types.ObjectId,
     required: true
   },
