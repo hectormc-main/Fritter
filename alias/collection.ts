@@ -3,6 +3,10 @@ import type {Alias} from './model';
 import AliasModel from './model';
 import type {User} from '../user/model';
 import UserModel from '../user/model';
+import FreetCollection from "../freet/collection";
+import ProliferateCollection from "../proliferate/collection";
+import ReactionCollection from "../reaction/collection";
+import RejectionCollection from "../rejection/collection";
 
 /**
  * This file contains a class with functionality to interact with Aliases stored
@@ -80,8 +84,14 @@ class AliasCollection {
    * @return {Promise<Boolean>} - true if the alias has been deleted, false otherwise
    */
   static async deleteOne(aliasId: Types.ObjectId | string): Promise<boolean> {
-    const alias = await AliasModel.deleteOne({_id: aliasId});
-    return alias !== null;
+    const alias = await AliasModel.findOne({_id: aliasId});
+    await FreetCollection.deleteMany(alias._id);
+    await ProliferateCollection.deleteManyByAliasId(alias._id);
+    await ReactionCollection.deleteManyByAliasId(alias._id);
+    await RejectionCollection.deleteManyByAliasId(alias._id);
+
+    const del_alias = await AliasModel.deleteOne({_id: aliasId});
+    return del_alias !== null;
   }
 }
 

@@ -7,6 +7,8 @@ import * as aliasValidator from './middleware';
 import * as util from './util';
 import UserCollection from '../user/collection';
 import ProliferateCollection from '../proliferate/collection';
+import ReactionCollection from "../reaction/collection";
+import RejectionCollection from "../rejection/collection";
 
 const router = express.Router();
 
@@ -172,10 +174,9 @@ router.delete(
     const aliasname = (req.body.aliasname as string) ?? '';
     const alias = await AliasCollection.findOneByAliasname(aliasname);
 
-    // Delete everything this user has done
+    // Delete everything this alias has done
     await AliasCollection.deleteOne(alias._id);
-    await FreetCollection.deleteMany(alias._id);
-    await ProliferateCollection.deleteManyByAliasId(alias._id);
+
     if (req.session.aliasId === alias._id.toString()) {
       req.session.aliasId = undefined;
     }

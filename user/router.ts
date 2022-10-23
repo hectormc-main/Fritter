@@ -4,6 +4,7 @@ import FreetCollection from '../freet/collection';
 import UserCollection from './collection';
 import * as userValidator from '../user/middleware';
 import * as util from './util';
+import AliasCollection from "../alias/collection";
 
 const router = express.Router();
 
@@ -139,8 +140,13 @@ router.delete(
   ],
   async (req: Request, res: Response) => {
     const userId = (req.session.userId as string) ?? ''; // Will not be an empty string since its validated in isUserLoggedIn
+    // delete everything the aliases have done
+    const aliases = await AliasCollection.findAllByUserId(userId);
+    aliases.map(async alias => AliasCollection.deleteOne(alias._id));
+
     await UserCollection.deleteOne(userId);
     await FreetCollection.deleteMany(userId);
+    // TODO delete all alias things
     req.session.userId = undefined;
     res.status(200).json({
       message: 'Your account has been deleted successfully.'
