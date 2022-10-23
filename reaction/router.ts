@@ -1,10 +1,8 @@
 import type {Request, Response} from 'express';
 import express from 'express';
 import ReactionCollection from './collection';
-// Import * as reactionValidator from './middleware';
-import * as aliasValidator from '../alias/middleware';
-import ReactionModel from "./model";
-// Import * as util from './util';
+import * as reactionValidator from './middleware';
+import * as util from './util';
 
 const router = express.Router();
 
@@ -14,7 +12,7 @@ const router = express.Router();
  * @name POST /api/reactions/:contentId
  *
  * @param {string} contendId - contentId of content
- // * @return {ReactionResponse} - The created reaction
+ * @return {ReactionResponse} - The created reaction
  *
  * TODO throws
  *
@@ -22,7 +20,9 @@ const router = express.Router();
 router.post(
   '/:contentId?',
   [
-    aliasValidator.isAliasLoggedIn
+    // No need to check for alias log in as finding reaction does that implicitly
+    reactionValidator.hasAliasNotReactedToContent,
+    reactionValidator.isValidEmojiCode
     // TODO additional validators
   ],
   async (req: Request, res: Response) => {
@@ -30,8 +30,31 @@ router.post(
     const reaction = await ReactionCollection.addOne(aliasId, req.params.contentId, req.body.emojiCode);
 
     res.status(201).json({
-      message: 'You have successfully proliferated'
-      // Reaction: util.constructProliferateResponse(proliferate)
+      message: 'You have successfully proliferated',
+      reaction: util.constructReactionResponse(reaction)
+    });
+  }
+);
+
+/**
+ * Change a reaction entry
+ *
+ * @name PUT /api/reactions/:contentId
+ */
+router.put(
+  '/:contentId?',
+  [
+    reactionValidator.hasAliasReactedToContent,
+    reactionValidator.isValidEmojiCode
+    // TODO handlers
+  ],
+  async (req: Request, res: Response) => {
+    const aliasId = (req.session.aliasId as string) ?? '';
+    const reaction = await ReactionCollection.updateOne(aliasId, req.params.contentId, req.body.emojiCode);
+
+    res.status(200).json({
+      message: 'Content successfully ',
+      reaction: util.constructReactionResponse(reaction)
     });
   }
 );
@@ -52,7 +75,7 @@ router.get(
     const reactions = await ReactionCollection.findAllByContentId(req.params.contentId);
 
     res.status(201).json({
-      reactions
+      reactions: reactions.map(obj => util.constructReactionResponse(obj))
     });
   }
 );
@@ -65,7 +88,8 @@ router.get(
 router.delete(
   '/:contentId?',
   [
-    aliasValidator.isAliasLoggedIn
+    reactionValidator.hasAliasReactedToContent,
+    reactionValidator.isValidEmojiCode
     // TODO handlers
   ],
   async (req: Request, res: Response) => {

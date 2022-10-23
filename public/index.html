@@ -9,6 +9,7 @@
   <script src="/scripts/user.js"></script>
   <script src="/scripts/alias.js"></script>
   <script src="/scripts/proliferate.js"></script>
+  <script src="scripts/reaction.js"></script>
   <script src="/scripts/index.js"></script>
 </head>
 
@@ -193,7 +194,7 @@
           <h1>PROLIFERATE</h1>
         </div>
 
-        <form id="proliferate-content">
+        <form id="create-proliferate">
           <h3>Proliferate Content</h3>
           <div>
             <label for="contentId">ID:</label>
@@ -202,7 +203,7 @@
           <input type="submit" value="Increment Proliferate on Content">
         </form>
 
-        <form id="proliferate-amount">
+        <form id="get-proliferate">
           <h3>How many proliferates</h3>
           <div>
             <label for="contentId">ID:</label>
@@ -211,7 +212,7 @@
           <input type="submit" value="Find number of proliferates">
         </form>
 
-        <form id="unproliferate-content">
+        <form id="delete-proliferate">
           <h3>Delete your Proliferate on Content</h3>
           <div>
             <label for="contentId">ID:</label>
@@ -219,6 +220,56 @@
           </div>
           <input type="submit" value="Increment Proliferate on Content">
         </form>
+
+
+        <div>
+          <h1>Reactions</h1>
+        </div>
+
+        <form id="create-reaction">
+          <h3>React to Content</h3>
+          <div>
+            <label for="contentId">Content ID:</label>
+            <input id="contentId" name="contentId">
+          </div>
+          <div>
+            <label for="emojiCode">Emoji Code:</label>
+            <input id="emojiCode" name="emojiCode">
+          </div>
+          <input type="submit" value="Create Reaction">
+        </form>
+
+        <form id="change-reaction">
+          <h3>Change Reaction</h3>
+          <div>
+            <label for="contentId">Content ID:</label>
+            <input id="contentId" name="contentId">
+          </div>
+          <div>
+            <label for="emojiCode">Emoji Code:</label>
+            <input id="emojiCode" name="emojiCode">
+          </div>
+          <input type="submit" value="Change Reaction">
+        </form>
+
+        <form id="get-reactions">
+          <h3>Get all reactions to content</h3>
+          <div>
+            <label for="contentId">ID:</label>
+            <input id="contentId" name="contentId">
+          </div>
+          <input type="submit" value="Create Reaction">
+        </form>
+
+        <form id="delete-reaction">
+          <h3>Un-react to content</h3>
+          <div>
+            <label for="contentId">ID:</label>
+            <input id="contentId" name="contentId">
+          </div>
+          <input type="submit" value="Delete Reaction">
+        </form>
+
 
       </div>
     </section>

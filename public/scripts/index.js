@@ -31,27 +31,31 @@ function showResponse(response) {
 
 // Map form (by id) to the function that should be called on submit
 const formsAndHandlers = {
-  'create-user': createUser,
+  'create-user': createUser, // User
   'delete-user': deleteUser,
   'change-username': changeUsername,
   'change-password': changePassword,
   'sign-in': signIn,
   'sign-out': signOut,
-  'view-all-freets': viewAllFreets,
+  'view-all-freets': viewAllFreets, // Freets
   'view-freets-by-author': viewFreetsByAuthor,
   'create-freet': createFreet,
   'edit-freet': editFreet,
   'delete-freet': deleteFreet,
-  'view-freet': viewFreet, // Add to formsAndHandlers to interact with on frontend
-  'create-alias': createAlias,
+  'view-freet': viewFreet,
+  'create-alias': createAlias, // Alias
   'get-aliases-of-user': getAliases,
   'sign-in-alias': signInAlias,
   'sign-out-alias': signOutAlias,
   'update-aliasname': updateAliasname,
   'delete-alias': deleteAlias,
-  'proliferate-content': createProliferate,
-  'unproliferate-content': deleteProliferate,
-  'proliferate-amount': getNumProliferates
+  'create-proliferate': createProliferate, // Proliferate
+  'get-proliferate': getNumProliferates,
+  'delete-content': deleteProliferate,
+  'create-reaction': createReaction, // Reaction
+  'change-reaction': changeReaction,
+  'get-reactions': getReactions,
+  'delete-reaction': deleteReaction
 };
 
 // Attach handlers to forms

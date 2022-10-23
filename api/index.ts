@@ -13,7 +13,8 @@ import * as aliasValidator from '../alias/middleware';
 import {userRouter} from '../user/router';
 import {freetRouter} from '../freet/router';
 import {aliasRouter} from '../alias/router';
-import {proliferateRouter} from '../proliferate/router'
+import {proliferateRouter} from '../proliferate/router';
+import {reactionRouter} from '../reaction/router';
 
 // Load environmental variables
 dotenv.config({});
@@ -81,6 +82,7 @@ app.use('/api/users', userRouter);
 app.use('/api/freets', freetRouter);
 app.use('/api/users/alias', aliasRouter);
 app.use('/api/proliferate', proliferateRouter);
+app.use('/api/reactions', reactionRouter);
 
 // Catch all the other routes and display error message
 app.all('*', (req: Request, res: Response) => {
