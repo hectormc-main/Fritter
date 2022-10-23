@@ -27,7 +27,7 @@ router.post(
     proliferateValidator.hasAliasNotProliferatedContent
   ],
   async (req: Request, res: Response) => {
-    const aliasId = (req.session.aliasId as string) ?? '';
+    const aliasId = (req.session.followerId as string) ?? '';
     const proliferate = await ProliferateCollection.addOne(aliasId, req.params.contentId);
 
     res.status(201).json({
@@ -76,7 +76,7 @@ router.delete(
     proliferateValidator.hasAliasProliferatedContent
   ],
   async (req: Request, res: Response) => {
-    const aliasId = (req.session.aliasId as string) ?? '';
+    const aliasId = (req.session.followerId as string) ?? '';
     await ProliferateCollection.deleteOneByAliasIdAndContentId(aliasId, req.params.contentId);
 
     res.status(200).json({

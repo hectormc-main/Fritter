@@ -8,12 +8,12 @@ export type Proliferate = {
 };
 
 const ProliferateSchema = new Schema({
-  aliasId: {
+  followerId: {
     type: Schema.Types.ObjectId,
     required: true
   },
   contentId: {
-    type: String,
+    type: Schema.Types.ObjectId,
     required: true
   }
 });

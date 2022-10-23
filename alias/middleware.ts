@@ -8,8 +8,8 @@ import AliasCollection from '../alias/collection';
  * when a alias tries to modify an account in some browser while it has been deleted in another
  */
 const isCurrentSessionAliasExists = async (req: Request, res: Response, next: NextFunction) => {
-  if (req.session.aliasId) {
-    const alias = await AliasCollection.findOneByAliasId(req.session.aliasId);
+  if (req.session.followerId) {
+    const alias = await AliasCollection.findOneByAliasId(req.session.followerId);
 
     if (!alias) {
       req.session.aliasId = undefined;
@@ -25,8 +25,10 @@ const isCurrentSessionAliasExists = async (req: Request, res: Response, next: Ne
   next();
 };
 
+// Aliasname Validity
+
 /**
- * Checks if an aliasname in req.body is valid, that is, it matches the aliasname regex
+ * Checks if req.body.aliasname is a valid aliasname
  */
 const isValidAliasname = (req: Request, res: Response, next: NextFunction) => {
   const aliasnameRegex = /^\w+$/i;
@@ -42,94 +44,86 @@ const isValidAliasname = (req: Request, res: Response, next: NextFunction) => {
   next();
 };
 
+// Existence
+
 /**
- * Checks if an alias with aliasname in req.body exists
+ * Checks if alias with req.body.aliasname exists
  */
-const isAccountExists = async (req: Request, res: Response, next: NextFunction) => {
-  const {aliasname} = req.body as {aliasname: string};
+const doesAccountWithAliasnameExist = async (req: Request, res: Response, next: NextFunction) => {
+  const aliasname = (req.body.aliasname as string) ?? '';
 
   if (!aliasname) {
-    res.status(400).json({error: 'Missing aliasname credentials for sign in.'});
+    res.status(400).json({error: 'No aliasname provided'});
     return;
   }
 
-  const alias = await AliasCollection.findOneByAliasname(
-    aliasname
-  );
+  const alias = await AliasCollection.findOneByAliasname(aliasname);
 
   if (alias) {
     next();
   } else {
-    res.status(401).json({error: 'Invalid alias credentials provided.'});
+    res.status(401).json({error: `Account with aliasname: ${aliasname} does not exist`});
   }
 };
 
 /**
- * Checks if the alias is logged in, that is, whether the aliasId is set in session
+ * Checks if alias with req.body.aliasId exists
  */
-const isAliasLoggedIn = (req: Request, res: Response, next: NextFunction) => {
-  if (!req.session.aliasId) {
-    res.status(403).json({
-      error: {
-        auth: 'You must be logged in to complete this action.'
-      }
-    });
+const doesAccountWithAliasIdExist = async (req: Request, res: Response, next: NextFunction) => {
+  const aliasId = (req.body.aliasId as string) ?? '';
+
+  if (!aliasId) {
+    res.status(400).json({error: 'aliasId not provided'});
     return;
   }
 
-  next();
-};
+  const alias = await AliasCollection.findOneByAliasId(aliasId);
 
-/**
- * Checks if the req.body.aliasname belongs to req.session.userId that is logged in.
- */
-const isAliasBelongToUser = async (req: Request, res: Response, next: NextFunction) => {
-  const alias = await AliasCollection.findOneByAliasname(req.body.aliasname);
-
-  if (alias.userId.toString() !== req.session.userId) {
-    res.status(403).json({
-      error: {
-        auth: 'This Alias does not belong to you.'
-      }
-    });
-    return;
-  }
-
-  next();
-};
-
-/**
- * Checks if the alias is signed out, that is, aliasId is undefined in session
- */
-const isAliasLoggedOut = (req: Request, res: Response, next: NextFunction) => {
-  if (req.session.aliasId) {
-    res.status(403).json({
-      error: 'You are already signed in.'
-    });
-    return;
-  }
-
-  next();
-};
-
-/**
- * Checks if a alias in req.body is already in use
- */
-const isAliasnameNotAlreadyInUse = async (req: Request, res: Response, next: NextFunction) => {
-  const alias = await AliasCollection.findOneByAliasname(req.body.aliasname);
-
-  // If the current session alias wants to change their aliasname to one which matches
-  // the current one irrespective of the case, we should allow them to do so
-  if (!alias || (alias?._id.toString() === req.session.aliasId)) {
+  if (alias) {
     next();
+  } else {
+    res.status(401).json({error: `Account with aliasId: ${aliasId} does not exist`});
+  }
+};
+
+/**
+ * Checks if account with req.params.aliasname exists
+ */
+const doesAccountWithParamAliasnameExist = async (req: Request, res: Response, next: NextFunction) => {
+  const aliasname = (req.params.aliasname) ?? '';
+
+  if (!aliasname) {
+    res.status(400).json({error: 'aliasname not in params'});
     return;
   }
 
-  res.status(409).json({
-    error: {
-      aliasname: 'An account with this aliasname already exists.'
-    }
-  });
+  const alias = await AliasCollection.findOneByAliasname(aliasname);
+
+  if (alias) {
+    next();
+  } else {
+    res.status(401).json({error: `Account with aliasname: ${aliasname} does not exist`});
+  }
+};
+
+/**
+ * Checks if account with req.params.aliasId exists
+ */
+const doesAccountWithParamAliasIdExist = async (req: Request, res: Response, next: NextFunction) => {
+  const aliasId = (req.params.aliasId) ?? '';
+
+  if (!aliasId) {
+    res.status(400).json({error: 'aliasId not in params'});
+    return;
+  }
+
+  const alias = await AliasCollection.findOneByAliasId(aliasId);
+
+  if (alias) {
+    next();
+  } else {
+    res.status(401).json({error: `Account with aliasId: ${aliasId} does not exist`});
+  }
 };
 
 /**
@@ -154,6 +148,81 @@ const isAuthorExists = async (req: Request, res: Response, next: NextFunction) =
   next();
 };
 
+// Belonging
+
+/**
+ * Checks if the req.body.aliasname belongs to req.session.userId
+ */
+const doesAliasBelongToUser = async (req: Request, res: Response, next: NextFunction) => {
+  const alias = await AliasCollection.findOneByAliasname(req.body.aliasname);
+
+  if (alias.userId.toString() !== req.session.userId) {
+    res.status(403).json({
+      error: {
+        auth: 'This Alias does not belong to you.'
+      }
+    });
+    return;
+  }
+
+  next();
+};
+
+// Logged In/Out
+
+/**
+ * Checks if the alias is logged in, that is, whether the aliasId is set in session
+ */
+const isAliasLoggedIn = (req: Request, res: Response, next: NextFunction) => {
+  if (!req.session.followerId) {
+    res.status(403).json({
+      error: {
+        auth: 'You must be logged in to complete this action.'
+      }
+    });
+    return;
+  }
+
+  next();
+};
+
+/**
+ * Checks if the alias is signed out, that is, aliasId is undefined in session
+ */
+const isAliasLoggedOut = (req: Request, res: Response, next: NextFunction) => {
+  if (req.session.followerId) {
+    res.status(403).json({
+      error: 'You are already signed in.'
+    });
+    return;
+  }
+
+  next();
+};
+
+// Duplicate Check
+
+/**
+ * Checks if an alias with req.body.aliasname exists
+ */
+const isAliasnameNotAlreadyInUse = async (req: Request, res: Response, next: NextFunction) => {
+  const aliasname = (req.body.aliasname as string) ?? '';
+  const alias = await AliasCollection.findOneByAliasname(aliasname);
+
+  // If the current session alias wants to change their aliasname to one which matches
+  // the current one irrespective of the case, we should allow them to do so
+  if (!alias || (alias?._id.toString() === req.session.followerId)) {
+    next();
+    return;
+  }
+
+  res.status(409).json({
+    error: {
+      aliasnameAlreadyInUse: `Account with aliasname ${aliasname} already exists`
+    }
+  });
+};
+
 export {
   isCurrentSessionAliasExists,
   isAliasnameNotAlreadyInUse,
@@ -161,6 +230,9 @@ export {
   isValidAliasname,
   isAliasLoggedOut,
   isAliasLoggedIn,
-  isAccountExists,
-  isAliasBelongToUser
+  doesAccountWithAliasIdExist,
+  doesAccountWithAliasnameExist,
+  doesAliasBelongToUser,
+  doesAccountWithParamAliasnameExist,
+  doesAccountWithParamAliasIdExist
 };

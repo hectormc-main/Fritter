@@ -59,8 +59,8 @@ router.post(
   [
     aliasValidator.isAliasLoggedOut,
     aliasValidator.isValidAliasname,
-    aliasValidator.isAccountExists,
-    aliasValidator.isAliasBelongToUser
+    aliasValidator.doesAccountWithAliasnameExist,
+    aliasValidator.doesAliasBelongToUser
   ],
   async (req: Request, res: Response) => {
     const alias = await AliasCollection.findOneByAliasname(req.body.aliasname);
@@ -110,8 +110,8 @@ router.get('/',
   ],
   async (req: Request, res: Response) => {
     let aliasname = '';
-    if (req.session.aliasId !== undefined) {
-      const alias = await AliasCollection.findOneByAliasId(req.session.aliasId);
+    if (req.session.followerId !== undefined) {
+      const alias = await AliasCollection.findOneByAliasId(req.session.followerId);
       console.log(alias);
       aliasname = alias.aliasname;
     }
@@ -146,7 +146,7 @@ router.put(
     aliasValidator.isAliasnameNotAlreadyInUse
   ],
   async (req: Request, res: Response) => {
-    const aliasId = (req.session.aliasId as string) ?? ''; // Will not be an empty string since its validated in isUserLoggedIn
+    const aliasId = (req.session.followerId as string) ?? ''; // Will not be an empty string since its validated in isUserLoggedIn
     const alias = await AliasCollection.updateOne(aliasId, req.body);
     res.status(200).json({
       message: 'Your aliasname was updated successfully.',
@@ -168,7 +168,7 @@ router.delete(
   [
     userValidator.isUserLoggedIn,
     aliasValidator.isValidAliasname,
-    aliasValidator.isAliasBelongToUser
+    aliasValidator.doesAliasBelongToUser
   ],
   async (req: Request, res: Response) => {
     const aliasname = (req.body.aliasname as string) ?? '';
@@ -177,7 +177,7 @@ router.delete(
     // Delete everything this alias has done
     await AliasCollection.deleteOne(alias._id);
 
-    if (req.session.aliasId === alias._id.toString()) {
+    if (req.session.followerId === alias._id.toString()) {
       req.session.aliasId = undefined;
     }
 

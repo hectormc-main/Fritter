@@ -18,7 +18,7 @@ const constructProliferateResponse = (proliferate: HydratedDocument<Proliferate>
   return {
     ...proliferateCopy,
     _id: proliferateCopy._id.toString(),
-    aliasId: proliferateCopy.aliasId.toString(),
+    followerId: proliferateCopy.followerId.toString(),
     contentId: proliferateCopy.contentId.toString()
   };
 };

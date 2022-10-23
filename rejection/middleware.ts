@@ -6,7 +6,7 @@ import RejectionCollection from './collection';
  * Checks if the signed in alias has not already rejected the desired content
  */
 const hasAliasNotRejectedContent = async (req: Request, res: Response, next: NextFunction) => {
-  const aliasId = (req.session.aliasId as string) ?? '';
+  const aliasId = (req.session.followerId as string) ?? '';
   const contentId = (req.params.contentId) ?? '';
   const rejection = await RejectionCollection.findOneByAliasIdAndContentId(aliasId, contentId);
 
@@ -27,7 +27,7 @@ const hasAliasNotRejectedContent = async (req: Request, res: Response, next: Nex
  * Checks if the signed in alias has already rejected the desired content
  */
 const hasAliasRejectedContent = async (req: Request, res: Response, next: NextFunction) => {
-  const aliasId = (req.session.aliasId as string) ?? '';
+  const aliasId = (req.session.followerId as string) ?? '';
   const contentId = (req.params.contentId) ?? '';
   const rejection = await RejectionCollection.findOneByAliasIdAndContentId(aliasId, contentId);
 

@@ -6,7 +6,7 @@ import ProliferateCollection from './collection';
  * Checks if the signed in alias has not already proliferated the desired content
  */
 const hasAliasNotProliferatedContent = async (req: Request, res: Response, next: NextFunction) => {
-  const aliasId = (req.session.aliasId as string) ?? '';
+  const aliasId = (req.session.followerId as string) ?? '';
   const contentId = (req.params.contentId) ?? '';
   const proliferate = await ProliferateCollection.findOneByAliasIdAndContentId(aliasId, contentId);
 
@@ -27,7 +27,7 @@ const hasAliasNotProliferatedContent = async (req: Request, res: Response, next:
  * Checks if the signed in alias has already proliferated the desired content
  */
 const hasAliasProliferatedContent = async (req: Request, res: Response, next: NextFunction) => {
-  const aliasId = (req.session.aliasId as string) ?? '';
+  const aliasId = (req.session.followerId as string) ?? '';
   const contentId = (req.params.contentId) ?? '';
   const proliferate = await ProliferateCollection.findOneByAliasIdAndContentId(aliasId, contentId);
 

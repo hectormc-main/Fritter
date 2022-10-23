@@ -26,7 +26,7 @@ const constructReactionResponse = (reaction: HydratedDocument<Reaction>): Reacti
   return {
     ...reactionCopy,
     _id: reactionCopy._id.toString(),
-    aliasId: reactionCopy.aliasId.toString(),
+    followerId: reactionCopy.followerId.toString(),
     contentId: reactionCopy.contentId.toString(),
     emojiCode: reactionCopy.emojiCode.toString()
   };

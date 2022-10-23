@@ -1,22 +1,22 @@
 import type {Types} from 'mongoose';
 import {Schema, model} from 'mongoose';
 
-export type Rejection = {
+export type Follow = {
   _id: Types.ObjectId; // MongoDB assigns each object this ID on creation
-  aliasId: Types.ObjectId; // Alias who rejected
-  contentId: Types.ObjectId; // Content that was rejected
+  followerId: Types.ObjectId; // Alias who follows
+  followedId: Types.ObjectId; // Alias that was followed
 };
 
-const RejectionSchema = new Schema({
+const FollowSchema = new Schema({
   followerId: {
     type: Schema.Types.ObjectId,
     required: true
   },
-  contentId: {
+  followedId: {
     type: Schema.Types.ObjectId,
     required: true
   }
 });
 
-const RejectionModel = model<Rejection>('Rejection', RejectionSchema);
-export default RejectionModel;
+const FollowModel = model<Follow>('Follow', FollowSchema);
+export default FollowModel;

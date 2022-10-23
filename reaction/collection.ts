@@ -19,7 +19,7 @@ class ReactionCollection {
    * @return {} Reaction object
    */
   static async addOne(aliasId: Types.ObjectId | string, contentId: string, emojiCode: string): Promise<HydratedDocument<Reaction>> {
-    const reaction = new ReactionModel({aliasId, contentId, emojiCode});
+    const reaction = new ReactionModel({aliasId: followerId, contentId, emojiCode});
     await reaction.save(); // Save Reaction to MongoDB
     return reaction;
   }

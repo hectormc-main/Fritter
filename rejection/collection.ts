@@ -18,7 +18,7 @@ class RejectionCollection {
    * @return {} Rejection objects
    */
   static async addOne(aliasId: Types.ObjectId | string, contentId: string): Promise<HydratedDocument<Rejection>> {
-    const rejection = new RejectionModel({aliasId, contentId});
+    const rejection = new RejectionModel({aliasId: followerId, contentId});
     await rejection.save(); // Save Rejection to MongoDB
     return rejection;
   }

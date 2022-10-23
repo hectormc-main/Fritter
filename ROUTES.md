@@ -377,7 +377,7 @@ This renders the `index.html` file that will be used to interact with the backen
 # Follow
 ---
 
-### 'POST /api/follow' - Follow alias
+### 'POST /api/follows' - Follow alias
 
 **Returns**
 
@@ -389,8 +389,29 @@ This renders the `index.html` file that will be used to interact with the backen
 - Alias is trying to follow itself
 - You already follow this alias
 
+### 'GET /api/follows/:aliasname' - Get all who aliasname follows
 
-### 'DELETE /api/follow' - Un-follow alias
+**Returns**
+
+- List of all Follow objects
+- Number of follow objects
+
+**Throws**
+
+- Alias with aliasname does not exist
+
+### 'GET /api/follows/followers/:aliasname' - Get all who follow aliasname
+
+**Returns**
+
+- List of all aliases followed
+- Number of aliases followed
+
+**Throws**
+
+- Alias with aliasname does not exist
+
+### 'DELETE /api/follows' - Un-follow alias
 
 **Returns**
 

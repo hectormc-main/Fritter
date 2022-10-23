@@ -1,12 +1,11 @@
 import type {HydratedDocument, Types} from 'mongoose';
 import type {Alias} from './model';
 import AliasModel from './model';
-import type {User} from '../user/model';
-import UserModel from '../user/model';
-import FreetCollection from "../freet/collection";
-import ProliferateCollection from "../proliferate/collection";
-import ReactionCollection from "../reaction/collection";
-import RejectionCollection from "../rejection/collection";
+import FreetCollection from '../freet/collection';
+import ProliferateCollection from '../proliferate/collection';
+import ReactionCollection from '../reaction/collection';
+import RejectionCollection from '../rejection/collection';
+import FollowCollection from '../follow/collection';
 
 /**
  * This file contains a class with functionality to interact with Aliases stored
@@ -89,6 +88,7 @@ class AliasCollection {
     await ProliferateCollection.deleteManyByAliasId(alias._id);
     await ReactionCollection.deleteManyByAliasId(alias._id);
     await RejectionCollection.deleteManyByAliasId(alias._id);
+    await FollowCollection.deleteManyByFollowerId(alias._id);
 
     const del_alias = await AliasModel.deleteOne({_id: aliasId});
     return del_alias !== null;

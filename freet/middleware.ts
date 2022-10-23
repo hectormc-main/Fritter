@@ -54,7 +54,7 @@ const isValidFreetContent = (req: Request, res: Response, next: NextFunction) =>
 const isValidFreetModifier = async (req: Request, res: Response, next: NextFunction) => {
   const freet = await FreetCollection.findOne(req.params.freetId);
   const aliasId = freet.authorId;
-  if (req.session.aliasId !== aliasId.toString()) {
+  if (req.session.followerId !== aliasId.toString()) {
     res.status(403).json({
       error: 'Cannot modify other alias\' freets.'
     });

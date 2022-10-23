@@ -7,7 +7,7 @@ import FreetCollection from '../freet/collection';
  * Checks if the signed in alias has not already reacted the desired content
  */
 const hasAliasNotReactedToContent = async (req: Request, res: Response, next: NextFunction) => {
-  const aliasId = (req.session.aliasId as string) ?? '';
+  const aliasId = (req.session.followerId as string) ?? '';
   const contentId = (req.params.contentId) ?? '';
   const reaction = await ReactionCollection.findOneByAliasIdAndContentId(aliasId, contentId);
 
@@ -28,7 +28,7 @@ const hasAliasNotReactedToContent = async (req: Request, res: Response, next: Ne
  * Checks if the signed in alias has already reacted the desired content
  */
 const hasAliasReactedToContent = async (req: Request, res: Response, next: NextFunction) => {
-  const aliasId = (req.session.aliasId as string) ?? '';
+  const aliasId = (req.session.followerId as string) ?? '';
   const contentId = (req.params.contentId) ?? '';
   const reaction = await ReactionCollection.findOneByAliasIdAndContentId(aliasId, contentId);
 
