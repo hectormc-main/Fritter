@@ -60,7 +60,9 @@ const formsAndHandlers = {
   'get-your-rejections': getRejections,
   'delete-rejection': deleteRejection,
   'create-follow': createFollow, // Follows
-  'delete-follow': deleteFollow
+  'delete-follow': deleteFollow,
+  'view-followers': viewFollowers,
+  'view-followed': viewFollowed
 };
 
 // Attach handlers to forms

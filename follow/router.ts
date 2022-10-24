@@ -55,7 +55,7 @@ router.get(
     aliasValidator.doesAccountWithParamAliasIdExist
   ],
   async (req: Request, res: Response) => {
-    const followerId = req.params.aliaId;
+    const followerId = req.params.aliasId;
     const follows = await FollowCollection.findAllByFollowerId(followerId);
 
     res.status(200).json({
@@ -68,7 +68,7 @@ router.get(
 /**
  * Get all who follow aliasId
  *
- * @name GET /api/follows/followers/:aliasId
+ * @name GET /api/follows/followers:aliasId
  *
  * @param req.params.aliasId - The aliasId of alias who is followed
  *

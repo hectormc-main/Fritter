@@ -118,12 +118,11 @@ router.get('/',
 
     const userId = (req.session.userId as string) ?? '';
     const aliases = await AliasCollection.findAllByUserId(userId);
-    const aliasnames = aliases.map(a => a.aliasname);
 
     res.status(200).json({
       message: 'Successfully retrieved aliases',
       currentAlias: aliasname,
-      allAliases: aliasnames
+      allAliases: aliases.map(alias => util.constructAliasResponse(alias))
     });
   });
 
