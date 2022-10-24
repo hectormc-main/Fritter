@@ -62,7 +62,8 @@ const formsAndHandlers = {
   'create-follow': createFollow, // Follows
   'delete-follow': deleteFollow,
   'view-followers': viewFollowers,
-  'view-followed': viewFollowed
+  'view-followed': viewFollowed,
+  'get-sub-box': getSubBox // Subscription Box
 };
 
 // Attach handlers to forms

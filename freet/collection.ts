@@ -64,6 +64,16 @@ class FreetCollection {
   }
 
   /**
+   * Get all the freets in by given author
+   *
+   * @param {string} authorId - The aliasId of author of the freets
+   * @return {Promise<HydratedDocument<Freet>[]>} - An array of all of the freets
+   */
+  static async findAllByAuthorId(authorId: Types.ObjectId | string): Promise<Array<HydratedDocument<Freet>>> {
+    return FreetModel.find({authorId});
+  }
+
+  /**
    * Update a freet with the new content
    *
    * @param {string} freetId - The id of the freet to be updated
