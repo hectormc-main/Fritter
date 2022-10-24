@@ -24,7 +24,7 @@ router.post(
   '/',
   [
     aliasValidator.isAliasLoggedIn,
-    aliasValidator.doesAccountWithAliasnameExist,
+    aliasValidator.doesAccountWithAliasIdExist,
     followValidator.doesAliasNotFollowOther
   ],
   async (req: Request, res: Response) => {
@@ -109,7 +109,7 @@ router.delete(
   ],
   async (req: Request, res: Response) => {
     const followerId = (req.session.aliasId as string) ?? '';
-    const followedId = (req.body.followedId as string) ?? '';
+    const followedId = (req.body.aliasId as string) ?? '';
     await FollowCollection.deleteOneByFollowerIdAndFollowedId(followerId, followedId);
 
     res.status(200).json({

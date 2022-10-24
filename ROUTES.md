@@ -389,7 +389,7 @@ This renders the `index.html` file that will be used to interact with the backen
 - Alias is trying to follow itself
 - You already follow this alias
 
-### 'GET /api/follows/:aliasname' - Get all who aliasname follows
+### 'GET /api/follows/:aliasId' - Get all who aliasId follows
 
 **Returns**
 
@@ -398,9 +398,9 @@ This renders the `index.html` file that will be used to interact with the backen
 
 **Throws**
 
-- Alias with aliasname does not exist
+- Alias with aliasId does not exist
 
-### 'GET /api/follows/followers/:aliasname' - Get all who follow aliasname
+### 'GET /api/follows/followers/:aliasId' - Get all who follow aliasId
 
 **Returns**
 
@@ -409,7 +409,7 @@ This renders the `index.html` file that will be used to interact with the backen
 
 **Throws**
 
-- Alias with aliasname does not exist
+- Alias with aliasId does not exist
 
 ### 'DELETE /api/follows' - Un-follow alias
 

@@ -58,7 +58,9 @@ const formsAndHandlers = {
   'delete-reaction': deleteReaction,
   'create-rejection': createRejection,
   'get-your-rejections': getRejections,
-  'delete-rejection': deleteRejection
+  'delete-rejection': deleteRejection,
+  'create-follow': createFollow, // Follows
+  'delete-follow': deleteFollow
 };
 
 // Attach handlers to forms

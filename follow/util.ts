@@ -4,8 +4,8 @@ import type {Follow} from './model';
 
 type FollowResponse = {
   _id: string;
-  aliasId: string;
-  followingId: string;
+  followerId: string;
+  followedId: string;
 };
 
 const constructFollowResponse = (follow: HydratedDocument<Follow>): FollowResponse => {

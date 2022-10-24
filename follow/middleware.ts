@@ -2,11 +2,11 @@ import type {Request, Response, NextFunction} from 'express';
 import FollowCollection from './collection';
 
 /**
- * Does req.session.aliasId *not* follow req.body.followedId
+ * Does req.session.aliasId *not* follow req.body.aliasId
  */
 const doesAliasNotFollowOther = async (req: Request, res: Response, next: NextFunction) => {
   const followerId = (req.session.aliasId as string) ?? '';
-  const followedId = (req.body.followedId as string) ?? '';
+  const followedId = (req.body.aliasId as string) ?? '';
   const follow = await FollowCollection.findOneByFollowerIdAndFollowedId(followerId, followedId);
 
   if (follow) {
@@ -27,7 +27,7 @@ const doesAliasNotFollowOther = async (req: Request, res: Response, next: NextFu
  */
 const doesAliasFollowOther = async (req: Request, res: Response, next: NextFunction) => {
   const followerId = (req.session.aliasId as string) ?? '';
-  const followedId = (req.body.followedId as string) ?? '';
+  const followedId = (req.body.aliasId as string) ?? '';
   const follow = await FollowCollection.findOneByFollowerIdAndFollowedId(followerId, followedId);
 
   if (!follow) {
