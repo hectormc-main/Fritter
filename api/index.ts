@@ -18,6 +18,7 @@ import {reactionRouter} from '../reaction/router';
 import {rejectionRouter} from '../rejection/router';
 import {followRouter} from '../follow/router';
 import {subBoxRouter} from '../sub_box/router';
+import {feedRouter} from '../feed/router';
 
 // Load environmental variables
 dotenv.config({});
@@ -89,6 +90,7 @@ app.use('/api/reactions', reactionRouter);
 app.use('/api/rejections', rejectionRouter);
 app.use('/api/follows', followRouter);
 app.use('/api/sub_box', subBoxRouter);
+app.use('/api/feed', feedRouter);
 
 // Catch all the other routes and display error message
 app.all('*', (req: Request, res: Response) => {

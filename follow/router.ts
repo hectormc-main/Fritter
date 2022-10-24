@@ -1,7 +1,6 @@
 import type {Request, Response} from 'express';
 import express from 'express';
 import FollowCollection from './collection';
-import AliasCollection from '../alias/collection';
 import * as followValidator from './middleware';
 import * as aliasValidator from '../alias/middleware';
 import * as util from './util';

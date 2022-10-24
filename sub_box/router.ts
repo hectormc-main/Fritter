@@ -9,14 +9,14 @@ const router = express.Router();
 /**
  * Get all content from aliasId
  *
- * @name GET /api/sub_box/
+ * @name GET /api/sub_box
  *
  * @param req.session.aliasId - The author of the content you are looking for
  * TODO throws
  *
  */
 router.get(
-  '/:aliasId?',
+  '/',
   [
     aliasValidator.isAliasLoggedIn
   ],
